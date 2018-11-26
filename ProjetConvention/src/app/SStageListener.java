@@ -16,6 +16,7 @@ import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.Topic;
 import messages.Formulaire;
+import messages.ValidOk;
 
 /**
  *
@@ -46,19 +47,15 @@ public class SStageListener implements MessageListener {
                 if (message instanceof ObjectMessage) {
                     ObjectMessage om = (ObjectMessage) message;
                     Object obj = om.getObject();
-                    if (obj instanceof Formulaire) {
-                        Formulaire form = (Formulaire) obj;
-                        System.out.println("Formulaire " + form.getNumCommande() + " reçue --> vérifier coord. bancaires");
-                        String iban = form.getClient().getIban();
-                        // System.out.println("IBAN : " + iban);
-                        // TODO: Client SOAP ou REST pour effectuer la vérif
+                    if (obj instanceof ValidOk) {
+                        ValidOk form = (ValidOk) obj;
+                        System.out.println("Formulaire n° " + form.getIdConv()+ " reçue --> vérifier coord. bancaires");
+                        boolean iban = form.getValConvention();
                         
                         
               //////////////PARTIE METIER///////////////
                         
                         /*
-                        // Ici, simu par tirage aléatoire
-                        double r = Math.random();
                         if (r > 0.3) {
                             // Vérif OK (~ 70%)
                             cmd.setBanqueValide(true);

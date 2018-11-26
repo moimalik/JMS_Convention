@@ -38,14 +38,12 @@ public class SStage extends ClientJMS{
             mp1 = session.createProducer(formValides);
             mp2 = session.createProducer(formConfirmes);
 
-            // TODO. Il faudrait un Listener par consommateur.
-            // Je vais au plus rapide là...
-            FacturationListener fl = new FacturationListener(session, mp);
-            mc1.setMessageListener(fl);
-            mc2.setMessageListener(fl);
+            // Quel MessageProducer doit on choisir
+            SStageListener fl = new SStageListener(session, mp1);
+            mc.setMessageListener(fl);
 
         } catch (JMSException | NamingException ex) {
-            Logger.getLogger(GenerateurCommandes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ex.getMessage());
         }
     }
 }

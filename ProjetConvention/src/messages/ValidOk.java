@@ -15,9 +15,9 @@ public class ValidOk implements Serializable{
     
     protected int idConv; 
     protected int numEtu;
-    private String valConvention;
+    private Boolean valConvention;
 
-    public ValidOk(int idConv, int numEtu, String valConvention) {
+    public ValidOk(int idConv, int numEtu, Boolean valConvention) {
         this.idConv = idConv;
         this.numEtu = numEtu;
         this.valConvention = valConvention;
@@ -39,11 +39,11 @@ public class ValidOk implements Serializable{
         this.numEtu = numEtu;
     }
 
-    public String getValConvention() {
+    public Boolean getValConvention() {
         return valConvention;
     }
 
-    public void setValConvention(String valConvention) {
+    public void setValConvention(Boolean valConvention) {
         this.valConvention = valConvention;
     }
 
