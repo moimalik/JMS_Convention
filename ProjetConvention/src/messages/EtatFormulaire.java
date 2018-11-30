@@ -10,5 +10,5 @@ package messages;
  * @author Fouad El Ouaryaghli
  */
 public enum EtatFormulaire {
-    AN_ATTENTE, EN_COURS_DE_TRAITEMENT, VALIDEE, REFUSEE
+    EN_COURS_DE_TRAITEMENT, VALIDEE, REFUSEE
 }

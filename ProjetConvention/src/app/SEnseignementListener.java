@@ -16,6 +16,7 @@ import javax.jms.ObjectMessage;
 import javax.jms.Session;
 import javax.jms.Topic;
 import messages.Formulaire;
+import messages.FormulaireEnValidation;
 import messages.ValidOk;
 
 
@@ -50,8 +51,8 @@ public class SEnseignementListener implements MessageListener{
                 if (message instanceof ObjectMessage) {
                     ObjectMessage om = (ObjectMessage) message;
                     Object obj = om.getObject();
-                    if (obj instanceof Formulaire) {
-                        Formulaire form = (Formulaire) obj;
+                    if (obj instanceof FormulaireEnValidation) {
+                        FormulaireEnValidation form = (FormulaireEnValidation) obj;
                         System.out.println("Formulaire n° " + form.getIdConv()+ " reçue --> vérifier config Enseignement");
                         int val = form.getIdConv();
                         
@@ -92,9 +93,12 @@ public class SEnseignementListener implements MessageListener{
         System.out.println(f.toString());
         System.out.println("saisir la reponse à la demande");
         
+        
+        
         Scanner sc = new Scanner(System.in);
             String s = sc.next();
         //faire set de s dans message
+        
     }
     public void traitementValid(ValidOk f){
         System.out.println("Demande de Pre convention Valider !!!");
