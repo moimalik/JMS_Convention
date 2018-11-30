@@ -67,24 +67,8 @@ public class SStageListener implements MessageListener {
                     }
                 }
             }
-
-            if (topicName.equalsIgnoreCase(Nommage.)) {
-
-                if (message instanceof ObjectMessage) {
-                    ObjectMessage om = (ObjectMessage) message;
-                    Object obj = om.getObject();
-                    if (obj instanceof Commande) {
-                        Commande cmd = (Commande) obj;
-                        System.out.println("Commande " + cmd.getNumCommande() + " traitée reçue --> effectuer débit");
-                        System.out.println("\t TODO...");
-
-                        // TODO: Client SOAP ou REST pour effectuer le débit
-                    }
-                }
-
-            }
         } catch (JMSException ex) {
-            Logger.getLogger(FacturationListener.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SStageListener.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
