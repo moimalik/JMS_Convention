@@ -7,6 +7,7 @@ package app;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.Destination;
@@ -14,6 +15,8 @@ import javax.jms.JMSException;
 import javax.jms.MessageConsumer;
 import javax.jms.MessageProducer;
 import javax.naming.NamingException;
+import messages.Formulaire;
+import org.apache.jasper.tagplugins.jstl.ForEach;
 
 /**
  *
@@ -25,7 +28,14 @@ public class SStage extends ClientJMS{
     private MessageProducer mp1;
     private MessageProducer mp2;
     
-        private void setProducerConsumer() {
+    private final HashMap<Integer, Formulaire> formEnAttente;
+
+    public SStage() {
+        this.formEnAttente = new HashMap();
+    }
+    
+    
+    private void setProducerConsumer() {
 
         try {
             
@@ -50,6 +60,19 @@ public class SStage extends ClientJMS{
         }
     }
         
+    
+
+    private boolean formulaireConfirmee(int key) {
+        
+        formEnAttente.get(key);
+        for (Formulaire f : cmdsEnAttente.get(key)) {
+            if (f.getQuantite() > lc.getStock()) {
+                System.out.println("\t stock NOK sur " + c.getNumCommande());
+                return false;
+            }
+        }
+        return true;
+    }
         
     public static void main(String[] args) throws Exception {
 
