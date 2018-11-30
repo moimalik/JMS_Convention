@@ -20,13 +20,14 @@ public class VerifEns extends Formulaire{
         this.validEns = validEns;
     }
 
-    public Boolean getvalidJuridique() {
+    public Boolean getValidEns() {
         return validEns;
     }
 
-    public void setvalidJuridique(Boolean validJuridique) {
-        this.validEns = validJuridique;
+    public void setValidEns(Boolean validEns) {
+        this.validEns = validEns;
     }
+
 
     @Override
     public String toString() {
