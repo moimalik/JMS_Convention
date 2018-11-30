@@ -16,7 +16,8 @@ import javax.jms.ObjectMessage;
 import javax.jms.Session;
 import javax.jms.Topic;
 import messages.Formulaire;
-import messages.VerifEns;
+import messages.ValidOk;
+
 
 /**
  *
@@ -55,13 +56,28 @@ public class SEnseignementListener implements MessageListener{
                         int val = form.getIdConv();
                         
                         //////////////PARTIE METIER///////////////
-                        //VerifEns verif = new VerifEns();
-                        traitement(form);
+                        traitementPreConv(form);
                         
                         // envoi de la réponse de la banque
                         ObjectMessage msg = session.createObjectMessage();
                         msg.setJMSType(Nommage.MSG_VALIDATION_JUR);
                         mp.send(msg);
+                    }
+                }
+            }else{
+                if (topicName.equalsIgnoreCase(Nommage.QUEUE_CONFIRMATION )){
+                    if (message instanceof ObjectMessage) {
+                        ObjectMessage om = (ObjectMessage) message;
+                        Object obj = om.getObject();
+                        if (obj instanceof ValidOk) {
+                            ValidOk form = (ValidOk) obj;
+                            System.out.println("Formulaire n° " + form.getIdConv()+ " reçue --> vérifier config Enseignement");
+                            int val = form.getIdConv();
+
+                            //////////////PARTIE METIER///////////////
+                            traitementValid(form);
+
+                        }
                     }
                 }
             }
@@ -70,7 +86,7 @@ public class SEnseignementListener implements MessageListener{
         }
         
     }
-    public void traitement(Formulaire f){
+    public void traitementPreConv(Formulaire f){
         
         System.out.println("Demande de Pre convention");
         System.out.println(f.toString());
@@ -79,8 +95,10 @@ public class SEnseignementListener implements MessageListener{
         Scanner sc = new Scanner(System.in);
             String s = sc.next();
         //faire set de s dans message
-        
-        
+    }
+    public void traitementValid(ValidOk f){
+        System.out.println("Demande de Pre convention Valider !!!");
+        System.out.println(f.toString());
     }
     
 }
