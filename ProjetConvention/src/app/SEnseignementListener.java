@@ -5,10 +5,19 @@
  */
 package app;
 
+import javax.jms.Message;
+import javax.jms.MessageListener;
+
 /**
  *
  * @author malik
  */
-public class SEnseignementListener {
+public class SEnseignementListener implements MessageListener{
+
+    @Override
+    public void onMessage(Message message) {
+        
+        
+    }
     
 }
