@@ -5,6 +5,7 @@
  */
 package app;
 
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.JMSException;
@@ -55,7 +56,7 @@ public class SEnseignementListener implements MessageListener{
                         
                         //////////////PARTIE METIER///////////////
                         //VerifEns verif = new VerifEns();
-                        
+                        traitement(form);
                         
                         // envoi de la réponse de la banque
                         ObjectMessage msg = session.createObjectMessage();
@@ -67,6 +68,18 @@ public class SEnseignementListener implements MessageListener{
         } catch (JMSException ex) {
             Logger.getLogger(SJuridiqueListener.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+    }
+    public void traitement(Formulaire f){
+        
+        System.out.println("Demande de Pre convention");
+        System.out.println(f.toString());
+        System.out.println("saisir la reponse à la demande");
+        
+        Scanner sc = new Scanner(System.in);
+            String s = sc.next();
+        //faire set de s dans message
+        
         
     }
     
