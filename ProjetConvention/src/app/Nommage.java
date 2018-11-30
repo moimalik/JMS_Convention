@@ -17,9 +17,9 @@ public class Nommage {
     public final static String QUEUE_VALIDATION = "jms/Validation";
     public final static String QUEUE_CONFIRMATION = "jms/Confirmation";
     
-    public final static String MSG_STOCK = "STOCK";
-    public final static String MSG_FACTURATION = "FACTURATION";
-    public final static String MSG_CMD_ANNULEE = "CMD_ANNULEE";
+    public final static String MSG_VALIDATION_JUR = "VALID_JURIDIQUE";
+    public final static String MSG_VALIDATION_ENS = "VALID_ENSEIGNEMENT";
+    public final static String MSG_VALIDATION_SCO = "VALID_SCOLARITE";
     public final static String MSG_FORM_VALIDE = "FORM_VALIDE";
     
 }
