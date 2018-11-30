@@ -9,6 +9,6 @@ package app;
  *
  * @author Fouad El Ouaryaghli
  */
-public class SJuridique {
+public class SJuridique extends ClientJMS{
     
 }
