@@ -15,8 +15,7 @@ import javax.jms.ObjectMessage;
 import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.Topic;
-import messages.Formulaire;
-import messages.ValidOk;
+import messages.*;
 
 /**
  *
@@ -47,29 +46,29 @@ public class SStageListener implements MessageListener {
                 if (message instanceof ObjectMessage) {
                     ObjectMessage om = (ObjectMessage) message;
                     Object obj = om.getObject();
-                    if (obj instanceof ValidOk) {
-                        ValidOk form = (ValidOk) obj;
+                    if (obj instanceof VerifEns) {
+                        VerifEns form = (VerifEns) obj;
                         System.out.println("Formulaire n° " + form.getIdConv()+ " reçue --> vérifier coord. bancaires");
-                        boolean val = form.getValConvention();
+                        boolean val = form.getValidEns();
                         
                         
               //////////////PARTIE METIER///////////////
                         
                         
                         if (val) {
-                            System.out.println("\t --> Coord. bancaires OK");
+                            System.out.println("\t --> ");
                         } else {
-                            System.out.println("\t --> Coord. bancaires NOK");
+                            System.out.println("\t --> ");
                         }
                         // envoi de la réponse de la banque
-                        ObjectMessage msg = session.createObjectMessage(cmd);
-                        msg.setJMSType(Nommage.MSG_FACTURATION);
+                        ObjectMessage msg = session.createObjectMessage(form);
+                        msg.setJMSType(Nommage.MSG_FORM_VALIDE);
                         mp.send(msg);
                     }
                 }
             }
 
-            if (topicName.equalsIgnoreCase(Nommage.TOPIC_CMDS_TRAITEES)) {
+            if (topicName.equalsIgnoreCase(Nommage.)) {
 
                 if (message instanceof ObjectMessage) {
                     ObjectMessage om = (ObjectMessage) message;

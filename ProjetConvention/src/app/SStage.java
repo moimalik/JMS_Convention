@@ -42,6 +42,7 @@ public class SStage extends ClientJMS{
 
             // Quel MessageProducer doit on choisir
             SStageListener fl = new SStageListener(session, mp1);
+            SStageListener f2 = new SStageListener(session, mp2);
             mc.setMessageListener(fl);
 
         } catch (JMSException | NamingException ex) {
