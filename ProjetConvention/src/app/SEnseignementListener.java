@@ -15,6 +15,7 @@ import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.jms.Session;
 import javax.jms.Topic;
+import messages.EtatFormulaire;
 import messages.Formulaire;
 import messages.FormulaireEnValidation;
 import messages.ValidOk;
@@ -87,18 +88,25 @@ public class SEnseignementListener implements MessageListener{
         }
         
     }
-    public void traitementPreConv(Formulaire f){
+    public void traitementPreConv(FormulaireEnValidation f){
         
         System.out.println("Demande de Pre convention");
         System.out.println(f.toString());
-        System.out.println("saisir la reponse à la demande");
-        
-        
+        System.out.println("saisir la reponse à la demande (oui/non)");
         
         Scanner sc = new Scanner(System.in);
             String s = sc.next();
         //faire set de s dans message
-        
+        switch(s) {
+                case "oui":
+                    f.setVerifEnseignement(EtatFormulaire.VALIDEE);
+                    break;
+                case "non":
+                    f.setVerifEnseignement(EtatFormulaire.REFUSEE);
+                    break;
+                default:
+                    System.out.println("la reponse ne peut etre que oui ou non !!!");
+            }
     }
     public void traitementValid(ValidOk f){
         System.out.println("Demande de Pre convention Valider !!!");
