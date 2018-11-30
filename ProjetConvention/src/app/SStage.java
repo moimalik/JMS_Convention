@@ -36,8 +36,8 @@ public class SStage extends ClientJMS{
             System.out.println("Destination lookup done.");
 
             // creation des consommateurs et du producteur
-            mc = session.createConsumer(formEmis);
-            mp1 = session.createProducer(formValides);
+            mc = session.createConsumer(formValides);
+            mp1 = session.createProducer(formEmis);
             mp2 = session.createProducer(formConfirmes);
 
             // Quel MessageProducer doit on choisir

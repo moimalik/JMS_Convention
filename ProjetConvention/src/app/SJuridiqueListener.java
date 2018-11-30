@@ -49,36 +49,19 @@ public class SJuridiqueListener implements MessageListener {
                         System.out.println("Formulaire n° " + form.getIdConv()+ " reçue --> vérifier coord. bancaires");
                         int val = form.getIdConv();
                         
-                        
               //////////////PARTIE METIER///////////////
                         
                         
                         
                         // envoi de la réponse de la banque
                         ObjectMessage msg = session.createObjectMessage(form);
-                        msg.setJMSType(Nommage.MSG_FACTURATION);
+                        msg.setJMSType(Nommage.MSG_VALIDATION_JUR);
                         mp.send(msg);
                     }
                 }
             }
-
-            if (topicName.equalsIgnoreCase(Nommage.)) {
-
-                if (message instanceof ObjectMessage) {
-                    ObjectMessage om = (ObjectMessage) message;
-                    Object obj = om.getObject();
-                    if (obj instanceof Commande) {
-                        Commande cmd = (Commande) obj;
-                        System.out.println("Commande " + cmd.getNumCommande() + " traitée reçue --> effectuer débit");
-                        System.out.println("\t TODO...");
-
-                        // TODO: Client SOAP ou REST pour effectuer le débit
-                    }
-                }
-
-            }
         } catch (JMSException ex) {
-            Logger.getLogger(FacturationListener.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SJuridiqueListener.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
