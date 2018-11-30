@@ -22,8 +22,8 @@ public class SScolariteListener implements MessageListener{
     public SScolariteListener(Session session, MessageProducer mp) {
         this.session = session;
         this.mp = mp;
-        
     }
+    
     @Override
     public void onMessage(Message message) {
         System.out.println(message.toString()); 
