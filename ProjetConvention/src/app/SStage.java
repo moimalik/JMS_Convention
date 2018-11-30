@@ -134,8 +134,8 @@ public class SStage extends ClientJMS{
                 } else 
                 {
                     // nouvelle commande, on l'ajoute dans le dict
-                    cmdsEnAttente.put(cmd.getNumCommande(), cmd);
-                    System.out.println("--> Commande " + cmd.getNumCommande() + " mise en attente.");
+                    formEnAttente.put(form.getIdConv(), form);
+                    System.out.println("--> Formulaire " + form.getIdConv() + " en attente.");
                 }
             }
         } catch (JMSException ex) 
