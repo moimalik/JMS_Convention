@@ -30,7 +30,7 @@ public class ClientJMS {
         try {
             // Provide the details of remote JMS Provider
             Properties props = new Properties();
-            props.put(Context.PROVIDER_URL, "mq://localhost:7676");
+            props.put(Context.PROVIDER_URL, "mq://localhost:4848");
             /*System.setProperty("java.naming.factory.initial",
                     "com.sun.enterprise.naming.SerialInitContextFactory");
             System.setProperty("org.omg.CORBA.ORBInitialHost", "127.0.0.1");
@@ -42,6 +42,7 @@ public class ClientJMS {
             System.out.println("Initial Context created.");
 
             // recuperation de la ConnectionFactory
+            System.out.println(Nommage.FABRIQUE_CONNEXIONS);
             ConnectionFactory cf = (ConnectionFactory) namingContext.lookup(Nommage.FABRIQUE_CONNEXIONS);
             System.out.println("Factory Name lookup done.");
 
