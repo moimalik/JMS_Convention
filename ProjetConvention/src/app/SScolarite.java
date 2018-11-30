@@ -26,7 +26,7 @@ public class SScolarite extends ClientJMS{
     private MessageConsumer mc;
     private MessageProducer mp;
     
-        private void setProducerConsumer() {
+    private void setProducerConsumer() {
 
         try {
              // recuperation des destinations
@@ -37,11 +37,6 @@ public class SScolarite extends ClientJMS{
             // creation du consommateur et du producteur
             mc = session.createConsumer(Emis);
             mp = session.createProducer(Recep);
-            
-           Message m = mc.receive();
-            
-            
-
         } catch (JMSException | NamingException ex) {
             Logger.getLogger(ex.getMessage());
         }
@@ -52,15 +47,15 @@ public class SScolarite extends ClientJMS{
     
     public static void main(String[] args) throws Exception {
 
-        SStage serviceStage = new SStage();
-        serviceStage.initJMS();
-        serviceStage.setProducerConsumer();
-        serviceStage.startJMS();
-        System.out.println("*** Service de stage démarré. ***");
+        SScolarite serviceScolarite = new SScolarite();
+        serviceScolarite.initJMS();
+        serviceScolarite.setProducerConsumer();
+        serviceScolarite.startJMS();
+        System.out.println("*** Service de scolarité a démarré. ***");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         do {
             System.out.println("Appuyez sur 'Q' pour quitter.");
         } while (!br.readLine().equalsIgnoreCase("Q"));
-        serviceStage.closeJMS();
+        serviceScolarite.closeJMS();
     }
 }
