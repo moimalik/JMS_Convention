@@ -49,12 +49,12 @@ public class SJuridiqueListener implements MessageListener {
                         System.out.println("Formulaire n° " + form.getIdConv()+ " reçue --> vérifier coord. bancaires");
                         int val = form.getIdConv();
                         
-              //////////////PARTIE METIER///////////////
-                        
+                        //////////////PARTIE METIER///////////////
+                        VerifJuridique verif = new VerifJuridique(Boolean.TRUE, form);
                         
                         
                         // envoi de la réponse de la banque
-                        ObjectMessage msg = session.createObjectMessage(form);
+                        ObjectMessage msg = session.createObjectMessage(verif);
                         msg.setJMSType(Nommage.MSG_VALIDATION_JUR);
                         mp.send(msg);
                     }
