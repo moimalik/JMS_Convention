@@ -15,8 +15,8 @@ public class VerifJuridique extends Formulaire{
     
     private Boolean validJuridique;
 
-    public VerifJuridique(Boolean validJuridique, int idConv, String nomEtu, String preEtu, int numEtu, String nivEtu, String dip, String nomAss, int numAss, String nomEnt, int numEnt, Date dtDeb, Date dtFin, int paie, String resumeStage) {
-        super(idConv, nomEtu, preEtu, numEtu, nivEtu, dip, nomAss, numAss, nomEnt, numEnt, dtDeb, dtFin, paie, resumeStage);
+    public VerifJuridique(Boolean validJuridique, Formulaire f) {
+        super(f.getIdConv(), f.nomEtu, f.preEtu, f.numEtu, f.nivEtu, f.dip, f.nomAss, f.numAss, f.nomEnt, f.numEnt, f.dtDeb, f.dtFin, f.paie, f.resumeStage);
         this.validJuridique = validJuridique;
     }
 
