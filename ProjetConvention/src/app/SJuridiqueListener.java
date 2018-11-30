@@ -31,7 +31,8 @@ public class SJuridiqueListener implements MessageListener {
         
     }
     @Override
-    public void onMessage(Message message) {try {
+    public void onMessage(Message message) {
+        try {
         
             Topic source = (Topic) message.getJMSDestination();
 
