@@ -64,7 +64,7 @@ public class SStage extends ClientJMS{
 
     private boolean formulaireConfirmee(int key) {
         
-        formEnAttente.get(key);
+        formEnAttente..;
         for (Formulaire f : cmdsEnAttente.get(key)) {
             if (f.getQuantite() > lc.getStock()) {
                 System.out.println("\t stock NOK sur " + c.getNumCommande());

@@ -46,11 +46,14 @@ public class SJuridiqueListener implements MessageListener {
                     Object obj = om.getObject();
                     if (obj instanceof Formulaire) {
                         Formulaire form = (Formulaire) obj;
-                        System.out.println("Formulaire n° " + form.getIdConv()+ " reçue --> vérifier coord. bancaires");
+                        System.out.println("Formulaire n° " + form.getIdConv()+ " reçue ");
                         int val = form.getIdConv();
                         
                         //////////////PARTIE METIER///////////////
-                        VerifJuridique verif = new VerifJuridique(Boolean.TRUE, form);
+                        FormulaireEnValidation verif = new FormulaireEnValidation(form);
+                        
+                        //ajouter les règle de valisation des formulaires
+                        verif.setVerifJuridique(EtatFormulaire.VALIDEE);
                         
                         
                         // envoi de la réponse de la banque
