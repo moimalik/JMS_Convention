@@ -5,6 +5,8 @@
  */
 package app;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.Destination;
@@ -45,5 +47,20 @@ public class SStage extends ClientJMS{
         } catch (JMSException | NamingException ex) {
             Logger.getLogger(ex.getMessage());
         }
+    }
+        
+        
+    public static void main(String[] args) throws Exception {
+
+        SStage serviceStage = new SStage();
+        serviceStage.initJMS();
+        serviceStage.setProducerConsumer();
+        serviceStage.startJMS();
+        System.out.println("*** Service de stage démarré. ***");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        do {
+            System.out.println("Appuyez sur 'Q' pour quitter.");
+        } while (!br.readLine().equalsIgnoreCase("Q"));
+        serviceStage.closeJMS();
     }
 }

@@ -50,21 +50,17 @@ public class SStageListener implements MessageListener {
                     if (obj instanceof ValidOk) {
                         ValidOk form = (ValidOk) obj;
                         System.out.println("Formulaire n° " + form.getIdConv()+ " reçue --> vérifier coord. bancaires");
-                        boolean iban = form.getValConvention();
+                        boolean val = form.getValConvention();
                         
                         
               //////////////PARTIE METIER///////////////
                         
-                        /*
-                        if (r > 0.3) {
-                            // Vérif OK (~ 70%)
-                            cmd.setBanqueValide(true);
+                        
+                        if (val) {
                             System.out.println("\t --> Coord. bancaires OK");
                         } else {
-                            // Vérif KO (~ 30%)
-                            cmd.setBanqueValide(false);
                             System.out.println("\t --> Coord. bancaires NOK");
-                        }*/
+                        }
                         // envoi de la réponse de la banque
                         ObjectMessage msg = session.createObjectMessage(cmd);
                         msg.setJMSType(Nommage.MSG_FACTURATION);
