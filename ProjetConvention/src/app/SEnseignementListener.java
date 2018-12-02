@@ -78,7 +78,6 @@ public class SEnseignementListener implements MessageListener{
 
                             //////////////PARTIE METIER///////////////
                             traitementValid(form);
-
                         }
                     }
                 }

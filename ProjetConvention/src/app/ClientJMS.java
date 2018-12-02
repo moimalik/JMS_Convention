@@ -30,7 +30,7 @@ public class ClientJMS {
         try {
             // Provide the details of remote JMS Provider
             Properties props = new Properties();
-            props.put(Context.PROVIDER_URL, "mq://localhost:4848");
+            props.put(Context.PROVIDER_URL, "mq://localhost:31196");
             /*System.setProperty("java.naming.factory.initial",
                     "com.sun.enterprise.naming.SerialInitContextFactory");
             System.setProperty("org.omg.CORBA.ORBInitialHost", "127.0.0.1");
