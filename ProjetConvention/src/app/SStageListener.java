@@ -46,10 +46,10 @@ public class SStageListener implements MessageListener {
                 if (message instanceof ObjectMessage) {
                     ObjectMessage om = (ObjectMessage) message;
                     Object obj = om.getObject();
-                    if (obj instanceof VerifEns) {
-                        VerifEns form = (VerifEns) obj;
+                    if (obj instanceof Formulaire) {
+                        Formulaire form = (Formulaire) obj;
                         System.out.println("Formulaire n° " + form.getIdConv()+ " reçue --> vérifier coord. bancaires");
-                        boolean val = form.getValidEns();
+                        boolean val = true ;//= form.getValidEns();
                         
                         
               //////////////PARTIE METIER///////////////
