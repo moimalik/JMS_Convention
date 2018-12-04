@@ -36,6 +36,7 @@ public class SStage extends ClientJMS{
     private final HashMap<Integer, FormulaireEnValidation> formEnAttente;
 
     public SStage() {
+        super();
         this.formEnAttente = new HashMap();
     }
     
@@ -148,8 +149,14 @@ public class SStage extends ClientJMS{
 
         SStage serviceStage = new SStage();
         serviceStage.initJMS();
-        serviceStage.setProducerConsumer();
-        serviceStage.startJMS();
+        
+        System.out.println("1");
+        //serviceStage.setProducerConsumer();
+        
+        System.out.println("2");
+        //serviceStage.startJMS();
+        
+        System.out.println("3");
         System.out.println("*** Service de stage démarré. ***");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         do {

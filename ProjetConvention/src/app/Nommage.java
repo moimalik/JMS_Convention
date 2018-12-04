@@ -14,8 +14,8 @@ public class Nommage {
     public final static String FABRIQUE_CONNEXIONS = "jms/__defaultConnectionFactory";
     
     public final static String TOPIC_FICHE_CONVENTION = "jms/FicheConv";
-    public final static String QUEUE_VALIDATION = "jms/Validation";
-    public final static String QUEUE_CONFIRMATION = "jms/Confirmation";
+    public final static String QUEUE_VALIDATION = "Validation";
+    public final static String QUEUE_CONFIRMATION = "Confirmation";
     
     public final static String MSG_VALIDATION_JUR = "VALID_JURIDIQUE";
     public final static String MSG_VALIDATION_ENS = "VALID_ENSEIGNEMENT";
