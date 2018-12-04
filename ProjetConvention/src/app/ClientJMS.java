@@ -28,12 +28,12 @@ public class ClientJMS {
 
     protected void initJMS() throws NamingException, JMSException {
             // Provide the details of remote JMS Provider
-            Properties props = new Properties();
-            props.put(Context.PROVIDER_URL, "mq://localhost:42634");
-/*            System.setProperty("java.naming.factory.initial",
+            //Properties props = new Properties();
+            //props.put(Context.PROVIDER_URL, "mq://localhost:42634");
+            System.setProperty("java.naming.factory.initial",
                     "com.sun.enterprise.naming.SerialInitContextFactory");
-            System.setProperty("org.omg.CORBA.ORBInitialHost", "127.0.0.1");
-            System.setProperty("org.omg.CORBA.ORBInitialPort", "3700");*/
+            System.setProperty("org.omg.CORBA.ORBInitialHost", "172.17.63.98");
+            System.setProperty("org.omg.CORBA.ORBInitialPort", "3700");
 
                         System.out.println("Initial du debut.");
 
