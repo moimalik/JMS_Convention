@@ -30,9 +30,9 @@ public class ClientJMS {
             // Provide the details of remote JMS Provider
             //Properties props = new Properties();
             //props.put(Context.PROVIDER_URL, "mq://localhost:42634");
-            System.setProperty("java.naming.factory.initial",
-                    "com.sun.enterprise.naming.SerialInitContextFactory");
-            System.setProperty("org.omg.CORBA.ORBInitialHost", "172.17.63.98");
+            //System.setProperty("java.naming.factory.initial",
+            //        "com.sun.enterprise.naming.SerialInitContextFactory");
+            System.setProperty("org.omg.CORBA.ORBInitialHost", "localhost");
             System.setProperty("org.omg.CORBA.ORBInitialPort", "3700");
 
                         System.out.println("Initial du debut.");
@@ -41,6 +41,7 @@ public class ClientJMS {
             // creation du contexte JNDI.
             namingContext = new InitialContext();
             System.out.println("Initial Context created.");
+            System.out.println(namingContext.toString());
 
             // recuperation de la ConnectionFactory
             ConnectionFactory cf = (ConnectionFactory) namingContext.lookup(Nommage.FABRIQUE_CONNEXIONS);

@@ -151,13 +151,15 @@ public class SStage extends ClientJMS{
         serviceStage.initJMS();
         
         System.out.println("1");
-        //serviceStage.setProducerConsumer();
+        serviceStage.setProducerConsumer();
+        
         
         System.out.println("2");
-        //serviceStage.startJMS();
+        serviceStage.startJMS();
         
         System.out.println("3");
         System.out.println("*** Service de stage démarré. ***");
+        
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         do {
             System.out.println("Appuyez sur 'Q' pour quitter.");
