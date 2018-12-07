@@ -8,6 +8,7 @@ package app;
 import com.google.gson.Gson;
 import fr.miage.toulouse.m2.eai.clientrest.metiersiren.SirenPOJO;
 import java.util.Calendar;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.JMSException;
@@ -122,7 +123,17 @@ public class SJuridiqueListener implements MessageListener {
     }
     public boolean metierAssurance(String nom,String nomAss, int numAss, Calendar debut, Calendar fin  ){
         // aucune api pour verifier les assurances
-        return true;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nom "+nom+" Assurance "+nomAss+" N° Assurance "+numAss+" Stage Du "+debut.toString()+" au "+fin.toString());
+        System.out.println("Validez vous les informations Assurance ?(y/n)");
+        String reponse = sc.nextLine();
+        if(reponse.equalsIgnoreCase("y"))
+        {
+            return true;
+        }else{
+            return false;
+        }
+        
     }
     public boolean metierRemuneration(int salaire ){
         if (salaire > 500){
