@@ -36,14 +36,11 @@ public class SEnseignementListener implements MessageListener{
     @Override
     public void onMessage(Message message) {
         
-        
-        
         try {
         
             Topic source = (Topic) message.getJMSDestination();
 
-            // System.out.println("MSG RECU " + source.getTopicName());
-            String topicName = source.getTopicName().replace('_', '/');
+            String topicName = source.getTopicName();
 
             if (topicName.equalsIgnoreCase(Nommage.TOPIC_FICHE_CONVENTION)) {
 
@@ -53,7 +50,6 @@ public class SEnseignementListener implements MessageListener{
                     if (obj instanceof FormulaireEnValidation) {
                         FormulaireEnValidation form = (FormulaireEnValidation) obj;
                         System.out.println("Formulaire n° " + form.getIdConv()+ " reçue --> vérifier config Enseignement");
-                        int val = form.getIdConv();
                         
                         //////////////PARTIE METIER///////////////
                         traitementPreConv(form);
@@ -72,8 +68,7 @@ public class SEnseignementListener implements MessageListener{
                         if (obj instanceof ValidOk) {
                             ValidOk form = (ValidOk) obj;
                             System.out.println("Formulaire n° " + form.getIdConv()+ " reçue --> vérifier config Enseignement");
-                            int val = form.getIdConv();
-
+                            
                             //////////////PARTIE METIER///////////////
                             traitementValid(form);
                         }
@@ -106,7 +101,7 @@ public class SEnseignementListener implements MessageListener{
             }
     }
     public void traitementValid(ValidOk f){
-        System.out.println("Demande de Pre convention Valider !!!");
+        System.out.println("Demande de Pre convention Validée !!!");
         System.out.println(f.toString());
     }
     

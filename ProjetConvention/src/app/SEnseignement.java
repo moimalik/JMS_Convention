@@ -42,6 +42,9 @@ public class SEnseignement extends ClientJMS{
             mc1 = session.createConsumer(RecepTopic);
             mc2 = session.createConsumer(RecepQueue);
             
+            mc1.setMessageListener(new SEnseignementListener(session, mp));
+            mc2.setMessageListener(new SEnseignementListener(session, mp));
+            
             
         } catch (JMSException | NamingException ex) {
             Logger.getLogger(ex.getMessage());

@@ -42,7 +42,7 @@ public class SStage extends ClientJMS{
             mp1 = session.createProducer(formEmis);
             mp2 = session.createProducer(formConfirmes);
 
-//             Quel MessageProducer doit on choisir
+            // création des listeners
             mc1.setMessageListener(new SStageListener(session, mp1));
             mc2.setMessageListener(new SStageListener(session, mp2));
 
