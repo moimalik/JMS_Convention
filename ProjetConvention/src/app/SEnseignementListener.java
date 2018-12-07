@@ -13,6 +13,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
+import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.Topic;
 import messages.EtatFormulaire;
@@ -37,12 +38,19 @@ public class SEnseignementListener implements MessageListener{
     public void onMessage(Message message) {
         
         try {
-        
-            Topic source = (Topic) message.getJMSDestination();
+            
+            String nameSource;
+            if (message.getJMSType().equalsIgnoreCase(Nommage.MSG_DIFFUSION_AU_SERVICE)){
+                Topic source = (Topic) message.getJMSDestination();
+                nameSource = source.getTopicName();
+            }
+            else {
+                Queue source = (Queue) message.getJMSDestination();
+                nameSource = source.getQueueName();
+            }
+            
 
-            String topicName = source.getTopicName();
-
-            if (topicName.equalsIgnoreCase(Nommage.TOPIC_FICHE_CONVENTION)) {
+            if (nameSource.equalsIgnoreCase(Nommage.TOPIC_FICHE_CONVENTION)) {
 
                 if (message instanceof ObjectMessage) {
                     ObjectMessage om = (ObjectMessage) message;
@@ -53,28 +61,29 @@ public class SEnseignementListener implements MessageListener{
                         
                         //////////////PARTIE METIER///////////////
                         traitementPreConv(form);
-                        
                         // envoi de la réponse de la banque
                         ObjectMessage msg = session.createObjectMessage();
                         msg.setJMSType(Nommage.MSG_VALIDATION_JUR);
                         mp.send(msg);
-                    }
+                        
+                     }
                 }
-            }else{
-                if (topicName.equalsIgnoreCase(Nommage.QUEUE_CONFIRMATION )){
-                    if (message instanceof ObjectMessage) {
-                        ObjectMessage om = (ObjectMessage) message;
-                        Object obj = om.getObject();
-                        if (obj instanceof ValidOk) {
-                            ValidOk form = (ValidOk) obj;
-                            System.out.println("Formulaire n° " + form.getIdConv()+ " reçue --> vérifier config Enseignement");
-                            
-                            //////////////PARTIE METIER///////////////
-                            traitementValid(form);
-                        }
+            }
+            
+            if (nameSource.equalsIgnoreCase(Nommage.QUEUE_CONFIRMATION )){
+                if (message instanceof ObjectMessage) {
+                    ObjectMessage om = (ObjectMessage) message;
+                    Object obj = om.getObject();
+                    if (obj instanceof ValidOk) {
+                        ValidOk form = (ValidOk) obj;
+                        System.out.println("Formulaire n° " + form.getIdConv()+ " reçue --> vérifier config Enseignement");
+
+                        //////////////PARTIE METIER///////////////
+                        traitementValid(form);
                     }
                 }
             }
+            
         } catch (JMSException ex) {
             Logger.getLogger(SJuridiqueListener.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -82,23 +91,14 @@ public class SEnseignementListener implements MessageListener{
     }
     public void traitementPreConv(FormulaireEnValidation f){
         
-        System.out.println("Demande de Pre convention");
-        System.out.println(f.toString());
-        System.out.println("saisir la reponse à la demande (oui/non)");
-        
-        Scanner sc = new Scanner(System.in);
-            String s = sc.next();
-        //faire set de s dans message
-        switch(s) {
-                case "oui":
-                    f.setVerifEnseignement(EtatFormulaire.VALIDEE);
-                    break;
-                case "non":
-                    f.setVerifEnseignement(EtatFormulaire.REFUSEE);
-                    break;
-                default:
-                    System.out.println("la reponse ne peut etre que oui ou non !!!");
-            }
+        double val = Math.random();
+        if (val > 0.9) {
+            System.out.println("Validée");
+            f.setVerifEnseignement(EtatFormulaire.VALIDEE);
+        } else {
+            System.out.println("Non validée");
+            f.setVerifEnseignement(EtatFormulaire.REFUSEE);
+        }
     }
     public void traitementValid(ValidOk f){
         System.out.println("Demande de Pre convention Validée !!!");
