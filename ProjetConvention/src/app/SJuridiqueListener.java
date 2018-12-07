@@ -39,7 +39,6 @@ public class SJuridiqueListener implements MessageListener {
     public SJuridiqueListener(Session session, MessageProducer mp) {
         this.session = session;
         this.mp = mp;
-        
     }
     @Override
     public void onMessage(Message message) {
@@ -63,17 +62,15 @@ public class SJuridiqueListener implements MessageListener {
                         
                         //////////////PARTIE METIER///////////////
                         boolean vEntreprise = metierInsee(String.valueOf(verif.getNumEnt()) ,verif.getNomEnt()) ;
-                        // a revoir avec calendar
                         boolean vAssurance = metierAssurance(verif.getNomEtu(), verif.getNomAss(), verif.getNumAss(), verif.getDtDeb(), verif.getDtFin()) ;
                         boolean vDate = metierDate(verif.getDtDeb(),verif.getDtFin()) ;
                         boolean vRemuneration = metierRemuneration(verif.getPaie()) ;
+                        
                         if(vEntreprise && vAssurance && vDate && vRemuneration){
                             verif.setVerifJuridique(EtatFormulaire.VALIDEE);
                         }else{
                             verif.setVerifJuridique(EtatFormulaire.REFUSEE);
                         }
-                        
-                        
                         
                         // envoi de la réponse de la banque
                         ObjectMessage msg = session.createObjectMessage(verif);
@@ -144,14 +141,7 @@ public class SJuridiqueListener implements MessageListener {
         }
     }
     public boolean metierDate(GregorianCalendar debut, GregorianCalendar fin ){
-        
-        
         if( (debut.compareTo(fin) > 0)){
-            //if( debut.add(Calendar.MONTH, 6).get() > 5)
-                
-                
-                
-                
             if ((debut.get(Calendar.MONTH) < 9) && (fin.get(Calendar.MONTH) > 9)){
                 return true;
             }else{
