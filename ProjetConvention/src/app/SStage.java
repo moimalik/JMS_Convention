@@ -7,23 +7,12 @@ package app;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.Message;
 import javax.jms.MessageConsumer;
 import javax.jms.MessageProducer;
-import javax.jms.ObjectMessage;
 import javax.naming.NamingException;
-import messages.EtatFormulaire;
-import messages.Formulaire;
-import messages.FormulaireEnValidation;
-import messages.ValidOk;
-import org.apache.jasper.tagplugins.jstl.ForEach;
 
 /**
  *
