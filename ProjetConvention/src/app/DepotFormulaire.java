@@ -56,9 +56,13 @@ public class DepotFormulaire extends ClientJMS{
             try {
                 // creation des ObjectMessage
                 ObjectMessage msg1 = session.createObjectMessage(f1);
+                msg1.setJMSType(Nommage.MSG_DEPOT);
                 ObjectMessage msg2 = session.createObjectMessage(f2);
+                msg2.setJMSType(Nommage.MSG_DEPOT);
                 ObjectMessage msg3 = session.createObjectMessage(f3);
+                msg3.setJMSType(Nommage.MSG_DEPOT);
                 ObjectMessage msg4 = session.createObjectMessage(f4);
+                msg4.setJMSType(Nommage.MSG_DEPOT);
                 
                 mp.send(msg1);
                 System.out.println("Form 1 envoyé");
