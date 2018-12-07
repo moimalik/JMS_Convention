@@ -7,7 +7,9 @@ package app;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.Destination;
@@ -41,7 +43,7 @@ public class SStage extends ClientJMS{
     }
     
     
-    private void setProducerConsumer() {
+    void setProducerConsumer() {
 
         try {
             
@@ -59,7 +61,6 @@ public class SStage extends ClientJMS{
             // Quel MessageProducer doit on choisir
             SStageListener fl = new SStageListener(session, mp1);
             SStageListener f2 = new SStageListener(session, mp2);
-            mc.setMessageListener(fl);
 
         } catch (JMSException | NamingException ex) {
             Logger.getLogger(ex.getMessage());
@@ -87,16 +88,16 @@ public class SStage extends ClientJMS{
             if (msg instanceof ObjectMessage) 
             {
                 ObjectMessage om = (ObjectMessage) msg;
+                type = om.getJMSType();
                 Object obj = om.getObject();
                 if (obj instanceof FormulaireEnValidation) 
                 {
                     form = (FormulaireEnValidation) obj;
-                    type = om.getJMSType();
                 } else 
                 {
                     return;
                 }
-            } else 
+            } else
             {
                 return;
             }
@@ -135,7 +136,7 @@ public class SStage extends ClientJMS{
                 } else 
                 {
                     // nouvelle commande, on l'ajoute dans le dict
-                    formEnAttente.put(form.getIdConv(), form);
+                    formEnAttente.put(form.getIdConv(), (FormulaireEnValidation) form);
                     System.out.println("--> Formulaire " + form.getIdConv() + " en attente.");
                 }
             }
@@ -147,6 +148,8 @@ public class SStage extends ClientJMS{
         
     public static void main(String[] args) throws Exception {
 
+        boolean theEnd = false;
+        
         SStage serviceStage = new SStage();
         serviceStage.initJMS();
         
@@ -160,10 +163,14 @@ public class SStage extends ClientJMS{
         System.out.println("3");
         System.out.println("*** Service de stage démarré. ***");
         
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
         do {
-            System.out.println("Appuyez sur 'Q' pour quitter.");
-        } while (!br.readLine().equalsIgnoreCase("Q"));
+            Message msg = serviceStage.mc.receive();
+
+            System.out.println("----------");
+            serviceStage.processMessage(msg);
+            
+        } while (!theEnd);
         serviceStage.closeJMS();
     }
 }

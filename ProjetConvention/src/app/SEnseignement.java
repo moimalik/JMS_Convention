@@ -25,7 +25,7 @@ public class SEnseignement extends ClientJMS{
     private MessageProducer mt;
     
     
-    private void setProducerConsumer() {
+    void setProducerConsumer() {
 
         try {
              // recuperation des destinations

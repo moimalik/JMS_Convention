@@ -26,7 +26,7 @@ public class SScolarite extends ClientJMS{
     private MessageConsumer mc;
     private MessageProducer mp;
     
-    private void setProducerConsumer() {
+    void setProducerConsumer() {
 
         try {
              // recuperation des destinations

@@ -41,7 +41,6 @@ public class ClientJMS {
             // creation du contexte JNDI.
             namingContext = new InitialContext();
             System.out.println("Initial Context created.");
-            System.out.println(namingContext.toString());
 
             // recuperation de la ConnectionFactory
             ConnectionFactory cf = (ConnectionFactory) namingContext.lookup(Nommage.FABRIQUE_CONNEXIONS);
