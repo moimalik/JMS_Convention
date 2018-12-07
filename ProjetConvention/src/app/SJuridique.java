@@ -5,6 +5,7 @@
  */
 package app;
 
+import fr.miage.toulouse.m2.eai.clientrest.metiersiren.SirenPOJO;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.logging.Logger;
@@ -46,13 +47,14 @@ public class SJuridique extends ClientJMS{
     }
         
         public static void main(String[] args) throws Exception {
-
+            
         SJuridique monService = new SJuridique();
         monService.initJMS();
         monService.setProducerConsumer();
         monService.startJMS();
         System.out.println("*** Service démarré. ***");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
         do {
             System.out.println("Appuyez sur 'Q' pour quitter.");
         } while (!br.readLine().equalsIgnoreCase("Q"));
