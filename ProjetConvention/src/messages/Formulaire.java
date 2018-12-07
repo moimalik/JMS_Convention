@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -27,12 +28,12 @@ public class Formulaire implements Serializable{
     protected int numAss;
     protected String nomEnt; 
     protected int numEnt;
-    protected Calendar dtDeb; 
-    protected Calendar dtFin; 
+    protected GregorianCalendar dtDeb; 
+    protected GregorianCalendar dtFin; 
     protected int paie;
     protected String resumeStage;
 
-    public Formulaire(int idConv, String nomEtu, String preEtu, int numEtu, String nivEtu, String dip, String nomAss, int numAss, String nomEnt, int numEnt, Calendar dtDeb, Calendar dtFin, int paie, String resumeStage) {
+    public Formulaire(int idConv, String nomEtu, String preEtu, int numEtu, String nivEtu, String dip, String nomAss, int numAss, String nomEnt, int numEnt, GregorianCalendar dtDeb, GregorianCalendar dtFin, int paie, String resumeStage) {
         this.idConv = idConv;
         this.nomEtu = nomEtu;
         this.preEtu = preEtu;
@@ -129,19 +130,19 @@ public class Formulaire implements Serializable{
         this.numEnt = numEnt;
     }
 
-    public Calendar getDtDeb() {
+    public GregorianCalendar getDtDeb() {
         return dtDeb;
     }
 
-    public void setDtDeb(Calendar dtDeb) {
+    public void setDtDeb(GregorianCalendar dtDeb) {
         this.dtDeb = dtDeb;
     }
 
-    public Calendar getDtFin() {
+    public GregorianCalendar getDtFin() {
         return dtFin;
     }
 
-    public void setDtFin(Calendar dtFin) {
+    public void setDtFin(GregorianCalendar dtFin) {
         this.dtFin = dtFin;
     }
 

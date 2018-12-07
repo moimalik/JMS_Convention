@@ -31,7 +31,8 @@ import org.apache.jasper.tagplugins.jstl.ForEach;
  */
 public class SStage extends ClientJMS{
   
-    private MessageConsumer mc;
+    private MessageConsumer mc1;
+    private MessageConsumer mc2;
     private MessageProducer mp1;
     private MessageProducer mp2;
     
@@ -48,13 +49,15 @@ public class SStage extends ClientJMS{
         try {
             
             // recuperation des destinations
+            Destination formRecu = (Destination) namingContext.lookup(Nommage.QUEUE_DEPOT);
             Destination formEmis = (Destination) namingContext.lookup(Nommage.TOPIC_FICHE_CONVENTION);
             Destination formValides = (Destination) namingContext.lookup(Nommage.QUEUE_VALIDATION);
             Destination formConfirmes = (Destination) namingContext.lookup(Nommage.QUEUE_CONFIRMATION);
             System.out.println("Destination lookup done.");
 
             // creation des consommateurs et du producteur
-            mc = session.createConsumer(formValides);
+            mc1 = session.createConsumer(formRecu);
+            mc2 = session.createConsumer(formValides);
             mp1 = session.createProducer(formEmis);
             mp2 = session.createProducer(formConfirmes);
 
@@ -101,7 +104,8 @@ public class SStage extends ClientJMS{
             {
                 return;
             }
-
+            
+            System.out.println(form.getDip());
             if (formEnAttente.containsKey(form.getIdConv())) 
             {
                 // Formaulaire deja recue
@@ -142,7 +146,7 @@ public class SStage extends ClientJMS{
             }
         } catch (JMSException ex) 
         {
-            Logger.getLogger(SStage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SStage.class.getName()).log(Level.SEVERE, null, ex);System.out.println("exception");
         }
     }
         
@@ -165,7 +169,7 @@ public class SStage extends ClientJMS{
         
         
         do {
-            Message msg = serviceStage.mc.receive();
+            Message msg = serviceStage.mc1.receive();
 
             System.out.println("----------");
             serviceStage.processMessage(msg);

@@ -6,6 +6,7 @@
 package app;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.Destination;
@@ -45,10 +46,10 @@ public class DepotFormulaire extends ClientJMS{
     void runSimu() {
 
         // creation des formulaires
-        Formulaire f1 = new Formulaire(0, "toto", "toto", 10, "M2", "MIAGE", "Assu1", 1, "totoComp", 1, new Date(), new Date(), 0, "blabla");
-        Formulaire f2 = new Formulaire(1, "tata", "tata", 20, "M2", "MIAGE", "Assu3", 1, "totoComp", 1, new Date(), new Date(), 0, "blabla");
-        Formulaire f3 = new Formulaire(2, "titi", "titi", 30, "M2", "MIAGE", "Assu2", 1, "totoComp", 1, new Date(), new Date(), 0, "blabla");;
-        Formulaire f4 = new Formulaire(3, "tutu", "tutu", 40, "M2", "MIAGE", "Assu5", 1, "totoComp", 1, new Date(), new Date(), 0, "blabla");;
+        Formulaire f1 = new Formulaire(0, "toto", "toto", 10, "M2", "MIAGE", "Assu1", 1, "totoComp", 1, new GregorianCalendar(), new GregorianCalendar(), 0, "blabla");
+        Formulaire f2 = new Formulaire(1, "tata", "tata", 20, "M2", "MIAGE", "Assu3", 1, "totoComp", 1, new GregorianCalendar(), new GregorianCalendar(), 0, "blabla");
+        Formulaire f3 = new Formulaire(2, "titi", "titi", 30, "M2", "MIAGE", "Assu2", 1, "totoComp", 1, new GregorianCalendar(), new GregorianCalendar(), 0, "blabla");;
+        Formulaire f4 = new Formulaire(3, "tutu", "tutu", 40, "M2", "MIAGE", "Assu5", 1, "totoComp", 1, new GregorianCalendar(), new GregorianCalendar(), 0, "blabla");;
 
 
        
@@ -60,9 +61,13 @@ public class DepotFormulaire extends ClientJMS{
                 ObjectMessage msg4 = session.createObjectMessage(f4);
                 
                 mp.send(msg1);
+                System.out.println("Form 1 envoyé");
                 mp.send(msg2);
+                System.out.println("Form 2 envoyé");
                 mp.send(msg3);
+                System.out.println("Form 3 envoyé");
                 mp.send(msg4);
+                System.out.println("Form 4 envoyé");
 
             } catch (JMSException ex) {
                 Logger.getLogger(DepotFormulaire.class.getName()).log(Level.SEVERE, null, ex);
