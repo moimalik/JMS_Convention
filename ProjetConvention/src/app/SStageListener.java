@@ -49,91 +49,102 @@ public class SStageListener implements MessageListener {
     
     @Override
     public void onMessage(Message msg) {
-try 
-        {
-            Formulaire form;
-            String type;
+        try 
+        {   
+            Queue source = (Queue) msg.getJMSDestination();
+            String queueName = source.getQueueName();
             
-            if (msg instanceof ObjectMessage) 
-            {
-                ObjectMessage om = (ObjectMessage) msg;
-                type = om.getJMSType();
-                System.out.println(type);
-                Object obj = om.getObject();
-                if (obj instanceof Formulaire) 
+            if (queueName.equalsIgnoreCase(Nommage.QUEUE_VALIDATION)){
+                FormulaireEnValidation form;
+                String type;
+
+                if (msg instanceof ObjectMessage) 
                 {
-                    form = (Formulaire) obj;
-                    System.out.println(form.getIdConv());
-                } else if (obj instanceof FormulaireEnValidation)
-                {
-                    form = (FormulaireEnValidation) obj;
-                    return;
-                } else {
-                    return;
+                    ObjectMessage om = (ObjectMessage) msg;
+                    type = om.getJMSType();
+                    System.out.println(type);
+                    Object obj = om.getObject();
+                    if (obj instanceof FormulaireEnValidation) 
+                    {  
+                        form = (FormulaireEnValidation) obj;
+                        System.out.println("FormV");
+                        
+                        System.out.println(form.getIdConv());
+
+                        //reception d'un formulaire en validation depuis les différents services
+                        if (formEnAttente.containsKey(form.getIdConv())) 
+                        {
+                            // Formaulaire deja recue
+
+
+                            System.out.println("--> Formulaire " + form.getIdConv() + " recue");
+
+                            if (type.equals(Nommage.MSG_VALIDATION_JUR))
+                                    formEnAttente.get(form.getIdConv()).setVerifJuridique(form.getVerifJuridique());
+                            if (type.equals(Nommage.MSG_VALIDATION_ENS))
+                                    formEnAttente.get(form.getIdConv()).setVerifJuridique(form.getVerifEnseignement());
+                            if (type.equals(Nommage.MSG_VALIDATION_SCO))
+                                    formEnAttente.get(form.getIdConv()).setVerifJuridique(form.getVerifScolarite());
+
+                            if (formulaireConfirmee(form.getIdConv())) 
+                            {
+
+                                System.out.println("--> Formulaire de pré-convention " + form.getIdConv() + " validée");
+
+                                ValidOk confirmation = new ValidOk(form.getIdConv(), form.getNumEtu(), Boolean.TRUE);
+                                
+                                om = session.createObjectMessage(confirmation);
+                                om.setJMSType(Nommage.MSG_FORM_VALIDE);
+                                mp.send(om);
+                            } else {
+
+                                // On vérifie les validations manquantes
+                                System.out.println("Validation Service Juridique : " + formEnAttente.get(form.getIdConv()).getVerifJuridique());
+                                System.out.println("Validation Service Scolarité : " + formEnAttente.get(form.getIdConv()).getVerifScolarite());
+                                System.out.println("Validation Départemnt d'enseignement : " + formEnAttente.get(form.getIdConv()).getVerifEnseignement());
+
+                            }
+                        }
+                        else 
+                        {
+                            formEnAttente.put(form.getIdConv(), new FormulaireEnValidation(form));
+                            System.out.println("--> Formulaire " + form.getIdConv() + " en attente.");
+
+                        }
+                    }
                 }
-            } else
-            {
-                return;
             }
             
-            System.out.println(form.getIdConv());
-            
-            //reception d'un formulaire en validation depuis les différents services
-            if (formEnAttente.containsKey(form.getIdConv())) 
-            {
-                // Formaulaire deja recue
-                
-                System.out.println("--> Formulaire " + form.getIdConv() + " recue");
+            if (queueName.equalsIgnoreCase(Nommage.QUEUE_DEPOT)){
+                Formulaire form;
+                String type;
 
-                if (formulaireConfirmee(form.getIdConv())) 
+                if (msg instanceof ObjectMessage) 
                 {
-                    
-                    System.out.println("--> Formulaire de pré-convention " + form.getIdConv() + " validée");
-                    
-                    if (type.equals(Nommage.MSG_VALIDATION_JUR))
-                            //formEnAttente.get(form.getIdConv()).setVerifJuridique(form.getVerifJuridique());
-                    if (type.equals(Nommage.MSG_VALIDATION_ENS))
-                            //formEnAttente.get(form.getIdConv()).setVerifJuridique(form.getVerifEnseignement());
-                    if (type.equals(Nommage.MSG_VALIDATION_SCO))
-                            //formEnAttente.get(form.getIdConv()).setVerifJuridique(form.getVerifScolarite());
-                    
-                    //si 3 vérifications sont valides, on envoie un msg au département d'enseignement
-                    if(formulaireConfirmee(form.getIdConv())) 
-                    {
-                        ValidOk confirmation = new ValidOk(form.getIdConv(), form.getNumEtu(), Boolean.TRUE);
-                        ObjectMessage om = session.createObjectMessage(confirmation);
-                        om.setJMSType(Nommage.MSG_FORM_VALIDE);
-                        mp2.send(om);
-                    } else 
-                    {
-                        // On vérifie les validations manquantes
-                        System.out.println("Validation Service Juridique : " + formEnAttente.get(form.getIdConv()).getVerifJuridique());
-                        System.out.println("Validation Service Scolarité : " + formEnAttente.get(form.getIdConv()).getVerifScolarite());
-                        System.out.println("Validation Départemnt d'enseignement : " + formEnAttente.get(form.getIdConv()).getVerifEnseignement());
+                    ObjectMessage om = (ObjectMessage) msg;
+                    type = om.getJMSType();
+                    System.out.println(type);
+                    Object obj = om.getObject();
+                    if (obj instanceof Formulaire) 
+                    {  
+                        form = (Formulaire) obj;
+                        System.out.println("Form");
+                        
+                        formEnAttente.put(form.getIdConv(), new FormulaireEnValidation(form));
+                        
+                        if (type.equals(Nommage.MSG_DEPOT)){
+
+                            FormulaireEnValidation f = new FormulaireEnValidation(form);
+                            formEnAttente.put(form.getIdConv(), f);
+                            System.out.println("--> Formulaire " + form.getIdConv() + " en attente.");
+
+                            om = session.createObjectMessage(f);
+                            om.setJMSType(Nommage.MSG_DIFFUSION_AU_SERVICE);
+                            mp.send(om);
+                            System.out.println("--> Formulaire " + form.getIdConv() + " diffusé aux différents service.");
+
+                        }
                     }
-                } 
-                else 
-                {
-                    
-                }
-                
-            }else {
-                // nouvelle commande, on l'ajoute dans le dict
-                formEnAttente.put(form.getIdConv(), new FormulaireEnValidation(form));
-                System.out.println("--> Formulaire " + form.getIdConv() + " en attente.");
-                
-                if (type.equals(Nommage.MSG_DEPOT)){
-                    
-                    FormulaireEnValidation f = new FormulaireEnValidation(form);
-                    formEnAttente.put(form.getIdConv(), f);
-                    System.out.println("--> Formulaire " + form.getIdConv() + " en attente.");
-                    
-                    ObjectMessage om = session.createObjectMessage(f);
-                    om.setJMSType(Nommage.MSG_DIFFUSION_AU_SERVICE);
-                    mp1.send(om);
-                } else {
-                    formEnAttente.put(form.getIdConv(), new FormulaireEnValidation(form));
-                    System.out.println("--> Formulaire " + form.getIdConv() + " en attente.");
                 }
             }
         } catch (JMSException ex) 
