@@ -13,6 +13,7 @@ public class Nommage {
     
     public final static String FABRIQUE_CONNEXIONS = "jms/__defaultConnectionFactory";
     
+    public final static String QUEUE_DEPOT = "Depot";
     public final static String TOPIC_FICHE_CONVENTION = "FicheConv";
     public final static String QUEUE_VALIDATION = "Validation";
     public final static String QUEUE_CONFIRMATION = "Confirmation";

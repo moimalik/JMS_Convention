@@ -5,7 +5,7 @@
  */
 package app;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.Destination;
@@ -13,6 +13,7 @@ import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.ObjectMessage;
 import javax.naming.NamingException;
+import messages.Date;
 import messages.Formulaire;
 
 /**
@@ -30,7 +31,7 @@ public class DepotFormulaire extends ClientJMS{
 
         try {
             // recuperation de la destination
-            Destination dest = (Destination) namingContext.lookup(Nommage.TOPIC_FICHE_CONVENTION);
+            Destination dest = (Destination) namingContext.lookup(Nommage.QUEUE_DEPOT);
             System.out.println("Destination lookup done.");
 
             // creation du producteur
