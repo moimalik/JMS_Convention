@@ -20,9 +20,6 @@ import javax.naming.NamingException;
  */
 public class SScolarite extends ClientJMS{
     
-    
-    
-    
     private MessageConsumer mc;
     private MessageProducer mp;
     
@@ -35,16 +32,14 @@ public class SScolarite extends ClientJMS{
             System.out.println("Destination lookup done.");
 
             // creation du consommateur et du producteur
-            mc = session.createConsumer(Emis);
-            mp = session.createProducer(Recep);
+            mc = session.createConsumer(Recep);
+            mp = session.createProducer(Emis);
+            
         } catch (JMSException | NamingException ex) {
             Logger.getLogger(ex.getMessage());
         }
     }
-    
-    
-    
-    
+   
     public static void main(String[] args) throws Exception {
 
         SScolarite serviceScolarite = new SScolarite();

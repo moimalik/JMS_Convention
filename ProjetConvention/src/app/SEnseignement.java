@@ -20,9 +20,9 @@ import javax.naming.NamingException;
  */
 public class SEnseignement extends ClientJMS{
     
-    private MessageConsumer mc;
+    private MessageConsumer mc1;
+    private MessageConsumer mc2;
     private MessageProducer mp;
-    private MessageProducer mt;
     
     
     void setProducerConsumer() {
@@ -37,10 +37,10 @@ public class SEnseignement extends ClientJMS{
             System.out.println("Destination lookup done.");
 
             // creation du consommateur et du producteur
-            mc = session.createConsumer(Emis);
+            mp = session.createProducer(Emis);
             
-            mp = session.createProducer(RecepTopic);
-            mt = session.createProducer(RecepQueue);
+            mc1 = session.createConsumer(RecepTopic);
+            mc2 = session.createConsumer(RecepQueue);
             
             
         } catch (JMSException | NamingException ex) {

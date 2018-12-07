@@ -16,9 +16,7 @@ import javax.jms.ObjectMessage;
 import javax.jms.Session;
 import javax.jms.Topic;
 import messages.EtatFormulaire;
-import messages.Formulaire;
-import messages.FormulaireEnValidation;
-import messages.ValidOk;
+import messages.*;
 
 
 /**

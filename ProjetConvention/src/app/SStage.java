@@ -25,8 +25,6 @@ public class SStage extends ClientJMS{
     private MessageProducer mp1;
     private MessageProducer mp2;
     
-    
-    
     void setProducerConsumer() {
 
         try {

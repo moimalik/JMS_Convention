@@ -52,6 +52,7 @@ public class SStageListener implements MessageListener {
         {   
             Queue source = (Queue) msg.getJMSDestination();
             String queueName = source.getQueueName();
+            System.out.println(queueName);
             
             if (queueName.equalsIgnoreCase(Nommage.QUEUE_VALIDATION)){
                 FormulaireEnValidation form;
