@@ -8,6 +8,7 @@ package app;
 import com.google.gson.Gson;
 import fr.miage.toulouse.m2.eai.clientrest.metiersiren.SirenPOJO;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -142,9 +143,15 @@ public class SJuridiqueListener implements MessageListener {
             return false;
         }
     }
-    public boolean metierDate(Calendar debut, Calendar fin ){
-        // voir comment gerer 15778800000
-        if( (long)(debut.compareTo(fin)) < 15778800000 && debut.compareTo(fin) > 0){
+    public boolean metierDate(GregorianCalendar debut, GregorianCalendar fin ){
+        
+        
+        if( (debut.compareTo(fin) > 0)){
+            //if( debut.add(Calendar.MONTH, 6).get() > 5)
+                
+                
+                
+                
             if ((debut.get(Calendar.MONTH) < 9) && (fin.get(Calendar.MONTH) > 9)){
                 return true;
             }else{
