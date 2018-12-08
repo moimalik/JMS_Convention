@@ -86,7 +86,7 @@ public class SStageListener implements MessageListener {
                             if (formulaireConfirmee(form.getIdConv())) 
                             {
 
-                                System.out.println("--> Formulaire de pré-convention " + form.getIdConv() + " validée");
+                                System.out.println("--> Formulaire de pré-convention " + form.getIdConv() + " à reçu toutes les validations !!!");
 
                                 ValidOk confirmation = new ValidOk(form.getIdConv(), form.getNumEtu(), Boolean.TRUE);
                                 

@@ -43,6 +43,7 @@ public class SJuridiqueListener implements MessageListener {
     @Override
     public void onMessage(Message message) {
         try {
+            System.out.println("------------------------");
         
             Topic source = (Topic) message.getJMSDestination();
 
@@ -67,7 +68,8 @@ public class SJuridiqueListener implements MessageListener {
                         boolean vDate = metierDate(verif.getDtDeb(),verif.getDtFin()) ;
                         boolean vRemuneration = metierRemuneration(verif.getPaie()) ;
                         
-                        if(vEntreprise && vAssurance && vDate && vRemuneration){
+//                        if(vEntreprise && vAssurance && vDate && vRemuneration){
+                        if(true){
                             verif.setVerifJuridique(EtatFormulaire.VALIDEE);
                         }else{
                             verif.setVerifJuridique(EtatFormulaire.REFUSEE);
@@ -124,12 +126,12 @@ public class SJuridiqueListener implements MessageListener {
         // aucune api pour verifier les assurances
         Scanner sc = new Scanner(System.in);
         System.out.println("Nom "+nom+" Assurance "+nomAss+" N° Assurance "+numAss+" Stage Du "+debut.toString()+" au "+fin.toString());
-        System.out.println("Validez vous les informations Assurance ?(y/n)");
-        String reponse = sc.nextLine();
-        if(reponse.equalsIgnoreCase("y"))
-        {
+        double val = Math.random();
+        if (val < 0.9) {
+            System.out.println("Validée");
             return true;
-        }else{
+        } else {
+            System.out.println("Non validée");
             return false;
         }
         

@@ -38,6 +38,7 @@ public class SEnseignementListener implements MessageListener{
     public void onMessage(Message message) {
         
         try {
+            System.out.println("------------------------");
             
             String nameSource;
             if (message.getJMSType().equalsIgnoreCase(Nommage.MSG_DIFFUSION_AU_SERVICE)){

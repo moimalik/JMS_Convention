@@ -35,6 +35,7 @@ public class SScolariteListener implements MessageListener{
     @Override
     public void onMessage(Message message) {
         try {
+            System.out.println("------------------------");
         
             Topic source = (Topic) message.getJMSDestination();
 

@@ -34,7 +34,7 @@ public class SJuridique extends ClientJMS{
             System.out.println("Destination lookup done.");
 
             // creation des consommateurs et du producteur
-            mc = session.createConsumer(formEmis, "JMSType='" + Nommage.MSG_VALIDATION_JUR + "'");
+            mc = session.createConsumer(formEmis);
             mp = session.createProducer(formValides);
 
             // Quel MessageProducer doit on choisir
