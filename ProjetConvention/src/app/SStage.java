@@ -64,7 +64,7 @@ public class SStage extends ClientJMS{
         serviceStage.startJMS();
         
         System.out.println("3");
-        System.out.println("*** Service de stage démarré. ***");
+        System.out.println("*** Service des stages démarré. ***");
         
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         do {

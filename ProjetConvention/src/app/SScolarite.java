@@ -35,6 +35,8 @@ public class SScolarite extends ClientJMS{
             mc = session.createConsumer(Recep);
             mp = session.createProducer(Emis);
             
+            mc.setMessageListener(new SScolariteListener(session, mp));
+            
         } catch (JMSException | NamingException ex) {
             Logger.getLogger(ex.getMessage());
         }

@@ -56,7 +56,7 @@ public class SEnseignement extends ClientJMS{
         serviceEnseignement.initJMS();
         serviceEnseignement.setProducerConsumer();
         serviceEnseignement.startJMS();
-        System.out.println("*** Service de enseignement a démarré. ***");
+        System.out.println("*** Service du département d'enseignement démarré. ***");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         do {
             System.out.println("Appuyez sur 'Q' pour quitter.");

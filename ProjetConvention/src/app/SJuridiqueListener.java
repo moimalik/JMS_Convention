@@ -47,7 +47,8 @@ public class SJuridiqueListener implements MessageListener {
             Topic source = (Topic) message.getJMSDestination();
 
             // System.out.println("MSG RECU " + source.getTopicName());
-            String topicName = source.getTopicName().replace('_', '/');
+            String topicName = source.getTopicName();
+            System.out.println(topicName);
 
             if (topicName.equalsIgnoreCase(Nommage.TOPIC_FICHE_CONVENTION)) {
 

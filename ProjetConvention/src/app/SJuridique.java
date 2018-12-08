@@ -38,8 +38,7 @@ public class SJuridique extends ClientJMS{
             mp = session.createProducer(formValides);
 
             // Quel MessageProducer doit on choisir
-            SStageListener fl = new SStageListener(session, mp);
-            mc.setMessageListener(fl);
+            mc.setMessageListener(new SJuridiqueListener(session, mp));
 
         } catch (JMSException | NamingException ex) {
             Logger.getLogger(ex.getMessage());
@@ -52,7 +51,7 @@ public class SJuridique extends ClientJMS{
         monService.initJMS();
         monService.setProducerConsumer();
         monService.startJMS();
-        System.out.println("*** Service démarré. ***");
+        System.out.println("*** Service juridique démarré. ***");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
         do {

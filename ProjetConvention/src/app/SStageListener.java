@@ -6,6 +6,7 @@
 package app;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.JMSException;
@@ -26,13 +27,11 @@ public class SStageListener implements MessageListener {
     private final MessageProducer mp;
     private final Session session;
     
-    final HashMap<Integer, FormulaireEnValidation> formEnAttente;
+    static final HashMap<Integer, FormulaireEnValidation> formEnAttente = new HashMap();;
 
     public SStageListener(Session session, MessageProducer mp) {
         this.session = session;
         this.mp = mp;
-        
-        this.formEnAttente = new HashMap();
     }
 
     private boolean formulaireConfirmee(int key) {
@@ -50,6 +49,7 @@ public class SStageListener implements MessageListener {
     public void onMessage(Message msg) {
         try 
         {   
+            System.out.println("---------------------");
             Queue source = (Queue) msg.getJMSDestination();
             String queueName = source.getQueueName();
             
@@ -63,27 +63,25 @@ public class SStageListener implements MessageListener {
                     type = om.getJMSType();
                     System.out.println(type);
                     Object obj = om.getObject();
-                    if (obj instanceof FormulaireEnValidation) 
+                    
+                    if (obj instanceof Formulaire) 
                     {  
                         form = (FormulaireEnValidation) obj;
                         System.out.println("FormV");
                         
-                        System.out.println(form.getIdConv());
-
                         //reception d'un formulaire en validation depuis les différents services
                         if (formEnAttente.containsKey(form.getIdConv())) 
                         {
                             // Formaulaire deja recue
-
 
                             System.out.println("--> Formulaire " + form.getIdConv() + " recue");
 
                             if (type.equals(Nommage.MSG_VALIDATION_JUR))
                                     formEnAttente.get(form.getIdConv()).setVerifJuridique(form.getVerifJuridique());
                             if (type.equals(Nommage.MSG_VALIDATION_ENS))
-                                    formEnAttente.get(form.getIdConv()).setVerifJuridique(form.getVerifEnseignement());
+                                    formEnAttente.get(form.getIdConv()).setVerifEnseignement(form.getVerifEnseignement());
                             if (type.equals(Nommage.MSG_VALIDATION_SCO))
-                                    formEnAttente.get(form.getIdConv()).setVerifJuridique(form.getVerifScolarite());
+                                    formEnAttente.get(form.getIdConv()).setVerifScolarite(form.getVerifScolarite());
 
                             if (formulaireConfirmee(form.getIdConv())) 
                             {
@@ -100,15 +98,9 @@ public class SStageListener implements MessageListener {
                                 // On vérifie les validations manquantes
                                 System.out.println("Validation Service Juridique : " + formEnAttente.get(form.getIdConv()).getVerifJuridique());
                                 System.out.println("Validation Service Scolarité : " + formEnAttente.get(form.getIdConv()).getVerifScolarite());
-                                System.out.println("Validation Départemnt d'enseignement : " + formEnAttente.get(form.getIdConv()).getVerifEnseignement());
+                                System.out.println("Validation Département d'enseignement : " + formEnAttente.get(form.getIdConv()).getVerifEnseignement());
 
                             }
-                        }
-                        else 
-                        {
-                            formEnAttente.put(form.getIdConv(), new FormulaireEnValidation(form));
-                            System.out.println("--> Formulaire " + form.getIdConv() + " en attente.");
-
                         }
                     }
                 }
@@ -129,13 +121,16 @@ public class SStageListener implements MessageListener {
                         form = (Formulaire) obj;
                         System.out.println("Form");
                         
-                        formEnAttente.put(form.getIdConv(), new FormulaireEnValidation(form));
-                        
                         if (type.equals(Nommage.MSG_DEPOT)){
 
                             FormulaireEnValidation f = new FormulaireEnValidation(form);
                             formEnAttente.put(form.getIdConv(), f);
                             System.out.println("--> Formulaire " + form.getIdConv() + " en attente.");
+                            
+                            formEnAttente.entrySet().forEach((fo) -> {
+                                System.out.println(fo.getKey());
+                            });
+                            System.out.println("-----------------------------------");
 
                             om = session.createObjectMessage(f);
                             om.setJMSType(Nommage.MSG_DIFFUSION_AU_SERVICE);
@@ -151,41 +146,5 @@ public class SStageListener implements MessageListener {
             System.out.println("exception");
             Logger.getLogger(SStage.class.getName()).log(Level.SEVERE, null, ex);
         }
-/*        try {
-            Queue source = (Queue) message.getJMSDestination();
-
-            // System.out.println("MSG RECU " + source.getTopicName());
-            String topicName = source.getQueueName().replace('_', '/');
-
-            if (topicName.equalsIgnoreCase(Nommage.QUEUE_VALIDATION)) {
-
-                if (message instanceof ObjectMessage) {
-                    ObjectMessage om = (ObjectMessage) message;
-                    Object obj = om.getObject();
-                    if (obj instanceof Formulaire) {
-                        Formulaire form = (Formulaire) obj;
-                        System.out.println("Formulaire n° " + form.getIdConv()+ " reçue --> vérifier coord. bancaires");
-                        boolean val = true ;//= form.getValidEns();
-                        
-                        
-              //////////////PARTIE METIER///////////////
-                        
-                        
-                        if (val) {
-                            System.out.println("\t --> ");
-                        } else {
-                            System.out.println("\t --> ");
-                        }
-                        // envoi de la réponse de la banque
-                        ObjectMessage msg = session.createObjectMessage(form);
-                        msg.setJMSType(Nommage.MSG_FORM_VALIDE);
-                        mp.send(msg);
-                    }
-                }
-            }
-        } catch (JMSException ex) {
-            Logger.getLogger(SStageListener.class.getName()).log(Level.SEVERE, null, ex);
-        }
-*/
     }
 }

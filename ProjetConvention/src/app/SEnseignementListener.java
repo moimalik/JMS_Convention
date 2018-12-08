@@ -62,8 +62,8 @@ public class SEnseignementListener implements MessageListener{
                         //////////////PARTIE METIER///////////////
                         traitementPreConv(form);
                         // envoi de la réponse de la banque
-                        ObjectMessage msg = session.createObjectMessage();
-                        msg.setJMSType(Nommage.MSG_VALIDATION_JUR);
+                        ObjectMessage msg = session.createObjectMessage(form);
+                        msg.setJMSType(Nommage.MSG_VALIDATION_ENS);
                         mp.send(msg);
                         
                      }
@@ -92,7 +92,7 @@ public class SEnseignementListener implements MessageListener{
     public void traitementPreConv(FormulaireEnValidation f){
         
         double val = Math.random();
-        if (val > 0.9) {
+        if (val < 0.9) {
             System.out.println("Validée");
             f.setVerifEnseignement(EtatFormulaire.VALIDEE);
         } else {

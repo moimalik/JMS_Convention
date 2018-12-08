@@ -5,7 +5,6 @@
  */
 package app;
 
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.JMSException;
@@ -40,7 +39,7 @@ public class SScolariteListener implements MessageListener{
             Topic source = (Topic) message.getJMSDestination();
 
             // System.out.println("MSG RECU " + source.getTopicName());
-            String topicName = source.getTopicName().replace('_', '/');
+            String topicName = source.getTopicName();
 
             if (topicName.equalsIgnoreCase(Nommage.TOPIC_FICHE_CONVENTION)) {
 
@@ -64,7 +63,7 @@ public class SScolariteListener implements MessageListener{
                         
                         // envoi de la réponse de la banque
                         ObjectMessage msg = session.createObjectMessage(verif);
-                        msg.setJMSType(Nommage.MSG_VALIDATION_JUR);
+                        msg.setJMSType(Nommage.MSG_VALIDATION_SCO);
                         mp.send(msg);
                     }
                 }
@@ -77,16 +76,15 @@ public class SScolariteListener implements MessageListener{
     }
     public boolean metier(String nom,String prenom, int num, String niveau,String inti ){
         // aucune api pour verifier les assurances
-        Scanner sc = new Scanner(System.in);
         System.out.println("Nom "+nom+" "+prenom+" N° "+String.valueOf(num) +" Niveau "+niveau+" intitulé "+inti);
-        System.out.println("Validez vous les informations Scolarité ?(y/n)");
-        String reponse = sc.nextLine();
-        if(reponse.equalsIgnoreCase("y"))
-        {
+        double val = Math.random();
+        if (val < 0.9) {
+            System.out.println("Validée");
             return true;
-        }else{
+        } else {
+            System.out.println("Non validée");
             return false;
         }
-        
+            
     }
 }
