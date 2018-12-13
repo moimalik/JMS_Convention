@@ -68,7 +68,11 @@ public class SJuridiqueListener implements MessageListener {
                         boolean vDate = metierDate(verif.getDtDeb(),verif.getDtFin()) ;
                         boolean vRemuneration = metierRemuneration(verif.getPaie()) ;
                         
-                        if(vEntreprise /*&& vAssurance && vDate && vRemuneration*/){
+                        System.out.println("result vent " + vEntreprise);
+                        System.out.println("result ass " + vAssurance);
+                        System.out.println("result date " + vDate);
+                        System.out.println("result rem " + vRemuneration);
+                        if(vEntreprise && vAssurance && vDate && vRemuneration){
                         //if(true){
                             verif.setVerifJuridique(EtatFormulaire.VALIDEE);
                         }else{
@@ -128,10 +132,8 @@ public class SJuridiqueListener implements MessageListener {
         System.out.println("Nom "+nom+" Assurance "+nomAss+" N° Assurance "+numAss+" Stage Du "+debut.toString()+" au "+fin.toString());
         double val = Math.random();
         if (val < 0.9) {
-            System.out.println("Validée");
             return true;
         } else {
-            System.out.println("Non validée");
             return false;
         }
         
@@ -144,9 +146,18 @@ public class SJuridiqueListener implements MessageListener {
         }
     }
     public boolean metierDate(GregorianCalendar debut, GregorianCalendar fin ){
-        if( (debut.compareTo(fin) > 0)){
-            if ((debut.get(Calendar.MONTH) < 9) && (fin.get(Calendar.MONTH) > 9)){
-                return true;
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(Math.abs(debut.getTimeInMillis()-fin.getTimeInMillis()));
+        int m = c.get(Calendar.MONTH);
+        if( (debut.compareTo(fin) < 0)){
+            if(m <= 6){
+                if ((debut.get(Calendar.MONTH) < 9) && (fin.get(Calendar.MONTH)> 9) && 
+                    ((fin.get(Calendar.YEAR) - debut.get(Calendar.YEAR)) <=1)
+                        ){
+                    return false;
+                }else{
+                    return true;
+                }
             }else{
                 return false;
             }
