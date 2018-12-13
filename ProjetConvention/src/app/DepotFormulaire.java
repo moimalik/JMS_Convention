@@ -44,10 +44,10 @@ public class DepotFormulaire extends ClientJMS{
     void runSimu() {
 
         // creation des formulaires
-        Formulaire f1 = new Formulaire(0, "toto", "toto", 10, "M2", "MIAGE", "Assu1", 1, "totoComp", 1, new GregorianCalendar(2018,2,20), new GregorianCalendar(2018,8,20), 600, "blabla");
-        Formulaire f2 = new Formulaire(1, "tata", "tata", 20, "M2", "MIAGE", "Assu3", 1, "totoComp", 1, new GregorianCalendar(2018,1,20), new GregorianCalendar(2018,8,20), 600, "blabla");
-        Formulaire f3 = new Formulaire(2, "titi", "titi", 30, "M2", "MIAGE", "Assu2", 1, "totoComp", 1, new GregorianCalendar(2018,3,20), new GregorianCalendar(2018,8,20), 600, "blabla");;
-        Formulaire f4 = new Formulaire(3, "tutu", "tutu", 40, "M2", "MIAGE", "Assu5", 1, "totoComp", 1, new GregorianCalendar(2018,2,20), new GregorianCalendar(2018,8,20), 600, "blabla");;
+        Formulaire f1 = new Formulaire(0, "toto", "toto", 10, "M2", "MIAGE", "Assu1", 1, "PIGEOT", 552100554, new GregorianCalendar(2018,2,20), new GregorianCalendar(2018,8,20), 600, "blabla");
+        Formulaire f2 = new Formulaire(1, "tata", "tata", 20, "M2", "MIAGE", "Assu3", 1, "PIGEOT", 552100554, new GregorianCalendar(2018,1,20), new GregorianCalendar(2018,8,20), 600, "blabla");
+        Formulaire f3 = new Formulaire(2, "titi", "titi", 30, "M2", "MIAGE", "Assu2", 1, "PIGEOT", 552100554, new GregorianCalendar(2018,3,20), new GregorianCalendar(2018,8,20), 600, "blabla");;
+        Formulaire f4 = new Formulaire(3, "tutu", "tutu", 40, "M2", "MIAGE", "Assu5", 1, "PIGEOT", 552100554, new GregorianCalendar(2018,2,20), new GregorianCalendar(2018,8,20), 600, "blabla");;
 
 
        
