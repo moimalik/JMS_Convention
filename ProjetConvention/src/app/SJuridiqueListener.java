@@ -68,8 +68,8 @@ public class SJuridiqueListener implements MessageListener {
                         boolean vDate = metierDate(verif.getDtDeb(),verif.getDtFin()) ;
                         boolean vRemuneration = metierRemuneration(verif.getPaie()) ;
                         
-//                        if(vEntreprise && vAssurance && vDate && vRemuneration){
-                        if(true){
+                        if(vEntreprise /*&& vAssurance && vDate && vRemuneration*/){
+                        //if(true){
                             verif.setVerifJuridique(EtatFormulaire.VALIDEE);
                         }else{
                             verif.setVerifJuridique(EtatFormulaire.REFUSEE);
