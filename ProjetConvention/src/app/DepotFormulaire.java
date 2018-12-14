@@ -16,13 +16,18 @@ import javax.naming.NamingException;
 import messages.Formulaire;
 
 /**
- *
+ * Service dépot de formulaire
  * @author Fouad El Ouaryaghli, Malik Belfodil
  */
 public class DepotFormulaire extends ClientJMS{
         private MessageProducer mp;
 
 
+    /**
+         * parametrage des producteurs et des consommateurs
+         *  
+         * @return void. 
+    */
     void setProducerConsumer() {
 
         try {
@@ -38,6 +43,11 @@ public class DepotFormulaire extends ClientJMS{
         }
     }
 
+    /**
+         * Envoie de message dans une file pour tester nos services
+         *  
+         * @return void. 
+    */
     void runSimu() {
 
         // creation des formulaires
@@ -77,16 +87,16 @@ public class DepotFormulaire extends ClientJMS{
                 ObjectMessage msg5 = session.createObjectMessage(f5);
                 msg5.setJMSType(Nommage.MSG_DEPOT);
                 
-//                mp.send(msg1);
-//                System.out.println("Form 1 envoyé");
-//                mp.send(msg2);
-//                System.out.println("Form 2 envoyé");
+                mp.send(msg1);
+                System.out.println("Form 1 envoyé");
+                mp.send(msg2);
+                System.out.println("Form 2 envoyé");
                 mp.send(msg3);
                 System.out.println("Form 3 envoyé");
-//                mp.send(msg4);
-//                System.out.println("Form 4 envoyé");
-//                mp.send(msg5);
-//                System.out.println("Form 5 envoyé");
+                mp.send(msg4);
+                System.out.println("Form 4 envoyé");
+                mp.send(msg5);
+                System.out.println("Form 5 envoyé");
 
             } catch (JMSException ex) {
                 Logger.getLogger(DepotFormulaire.class.getName()).log(Level.SEVERE, null, ex);

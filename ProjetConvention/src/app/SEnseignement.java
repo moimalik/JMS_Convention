@@ -15,7 +15,7 @@ import javax.jms.MessageProducer;
 import javax.naming.NamingException;
 
 /**
- *
+ * Service d'enseignement
  * @author Fouad El Ouaryaghli, Malik Belfodil
  */
 public class SEnseignement extends ClientJMS{
@@ -25,6 +25,11 @@ public class SEnseignement extends ClientJMS{
     private MessageProducer mp;
     
     
+    /**
+         * parametrage des producteurs et des consommateurs
+         *  
+         * @return void. 
+    */
     void setProducerConsumer() {
 
         try {

@@ -16,7 +16,7 @@ import javax.jms.MessageProducer;
 import javax.naming.NamingException;
 
 /**
- *
+ * Service juridique
  * @author Fouad El Ouaryaghli, Malik Belfodil
  */
 public class SJuridique extends ClientJMS{
@@ -24,6 +24,12 @@ public class SJuridique extends ClientJMS{
     private MessageConsumer mc;
     private MessageProducer mp;
     
+    
+    /**
+         * parametrage des producteurs et des consommateurs
+         *  
+         * @return void. 
+    */
         void setProducerConsumer() {
 
         try {
