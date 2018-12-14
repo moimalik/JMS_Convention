@@ -37,7 +37,7 @@ public class SStageListener implements MessageListener {
 /**
          * verification des retour de formulaire
          * 
-         * @param id pre convention
+         * @param key id de pre-convention
          *  
          * @return boolean. 
     */
@@ -54,7 +54,7 @@ public class SStageListener implements MessageListener {
     /**
          * reception, realisation metier et expedition
          * 
-         * @param message
+         * @param message messge a traiter 
          *  
          * @return void. 
     */

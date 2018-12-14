@@ -101,7 +101,7 @@ public class SEnseignementListener implements MessageListener{
     /**
          * mise en forme du message de retour
          * 
-         * @param message
+         * @param FormulaireEnValidation formulaire 
          *  
          * @return void. 
     */
@@ -119,8 +119,8 @@ public class SEnseignementListener implements MessageListener{
     /**
          * mise en forme du message de retour
          * 
-         * @param siren et nom de l'entreprise
-         *  
+         * @param siren siren de l'entreprise
+         * @param nom nom de l'entreprise 
          * @return boolean. 
     */
     public void traitementValid(ValidOk f){

@@ -35,7 +35,7 @@ public class SScolariteListener implements MessageListener{
     /**
          * reception, realisation metier et expedition
          * 
-         * @param message
+         * @param message message à traiter
          *  
          * @return void. 
     */
@@ -85,8 +85,13 @@ public class SScolariteListener implements MessageListener{
     /**
          * traitement du service scolarité
          * 
-         * @param nom, prenom, n°etudiant, niveau diplome, intitulé diplome 
-         *  
+         * @param nom nom de l'etudiant
+         * @param prenom prenom de l'etudian 
+         * @param num numero de l'etudiant
+         * @param niveau niveau du diplome
+         * @param inti intitulé du diplome
+         *
+         * 
          * @return boolean. 
     */
     public boolean metier(String nom,String prenom, int num, String niveau,String inti ){

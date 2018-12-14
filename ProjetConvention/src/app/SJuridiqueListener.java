@@ -44,7 +44,7 @@ public class SJuridiqueListener implements MessageListener {
     /**
          * reception realisation metier et expedition
          * 
-         * @param message
+         * @param message message traité
          *  
          * @return void. 
     */
@@ -102,8 +102,9 @@ public class SJuridiqueListener implements MessageListener {
     /**
          * Retourne un boolean qui verifie l'entreprise dans la base INSEE
          * 
-         * @param siren et nom de l'entreprise
-         *  
+         * @param siren siren de l'entreprise
+         * @param RS nom de l'entreprise
+         * 
          * @return boolean. 
     */
     public boolean metierInsee(String siren, String RS ){
@@ -149,7 +150,10 @@ public class SJuridiqueListener implements MessageListener {
          * Retourne un boolean qui verifie si l'assurance est OK
          * 
          * @param nom de l'etudiant, numero et nom assurance et date de stage 
-         *  
+         * @param nomAss nom assurance
+         * @param numAss numero assurance
+         * @param debut debut de stage
+         * @param fin debut de stage
          * @return boolean. 
     */
     public boolean metierAssurance(String nom,String nomAss, int numAss, Calendar debut, Calendar fin  ){
@@ -167,7 +171,7 @@ public class SJuridiqueListener implements MessageListener {
     /**
          * Retourne un boolean qui verifie si la remuneration est OK
          * 
-         * @param le salaire 
+         * @param salaire le salaire 
          *  
          * @return boolean. 
     */
@@ -181,7 +185,8 @@ public class SJuridiqueListener implements MessageListener {
     /**
          * Retourne un boolean qui verifie si les dates sont OK
          * 
-         * @param date de stage 
+         * @param debut debut de stage 
+         * @param fin fin de stage
          *  
          * @return boolean. 
     */
