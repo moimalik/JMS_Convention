@@ -16,13 +16,18 @@ import javax.naming.NamingException;
 import messages.Formulaire;
 
 /**
- *
+ * Service dépot de formulaire
  * @author Fouad El Ouaryaghli, Malik Belfodil
  */
 public class DepotFormulaire extends ClientJMS{
         private MessageProducer mp;
 
 
+    /**
+         * parametrage des producteurs et des consommateurs
+         *  
+         * @return void. 
+    */
     void setProducerConsumer() {
 
         try {
@@ -38,6 +43,11 @@ public class DepotFormulaire extends ClientJMS{
         }
     }
 
+    /**
+         * Envoie de message dans une file pour tester nos services
+         *  
+         * @return void. 
+    */
     void runSimu() {
 
         // creation des formulaires

@@ -15,7 +15,7 @@ import javax.jms.MessageProducer;
 import javax.naming.NamingException;
 
 /**
- *
+ * Service des stages
  * @author Fouad El Ouaryaghli, Malik Belfodil 
  */
 public class SStage extends ClientJMS{
@@ -25,6 +25,12 @@ public class SStage extends ClientJMS{
     private MessageProducer mp1;
     private MessageProducer mp2;
     
+    
+    /**
+         * parametrage des producteurs et des consommateurs
+         *  
+         * @return void. 
+    */
     void setProducerConsumer() {
 
         try {

@@ -15,7 +15,7 @@ import javax.jms.MessageProducer;
 import javax.naming.NamingException;
 
 /**
- *
+ * Service de scolarité
  * @author Fouad El Ouaryaghli, Malik Belfodil 
  */
 public class SScolarite extends ClientJMS{
@@ -23,6 +23,12 @@ public class SScolarite extends ClientJMS{
     private MessageConsumer mc;
     private MessageProducer mp;
     
+    
+    /**
+         * parametrage des producteurs et des consommateurs
+         *  
+         * @return void. 
+    */
     void setProducerConsumer() {
 
         try {
