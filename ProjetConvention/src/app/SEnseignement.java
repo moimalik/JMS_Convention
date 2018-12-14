@@ -16,7 +16,7 @@ import javax.naming.NamingException;
 
 /**
  *
- * @author malik
+ * @author Fouad El Ouaryaghli, Malik Belfodil
  */
 public class SEnseignement extends ClientJMS{
     

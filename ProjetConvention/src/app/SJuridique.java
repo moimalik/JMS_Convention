@@ -17,7 +17,7 @@ import javax.naming.NamingException;
 
 /**
  *
- * @author Fouad El Ouaryaghli
+ * @author Fouad El Ouaryaghli, Malik Belfodil
  */
 public class SJuridique extends ClientJMS{
     

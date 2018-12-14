@@ -17,14 +17,11 @@ import messages.Formulaire;
 
 /**
  *
- * @author Fouad El Ouaryaghli
+ * @author Fouad El Ouaryaghli, Malik Belfodil
  */
 public class DepotFormulaire extends ClientJMS{
         private MessageProducer mp;
 
-    public DepotFormulaire() {
-
-    }
 
     void setProducerConsumer() {
 
@@ -44,14 +41,26 @@ public class DepotFormulaire extends ClientJMS{
     void runSimu() {
 
         // creation des formulaires
-        Formulaire f1 = new Formulaire(1, "toto", "toto", 10, "M2", "MIAGE", "Assu1", 1, "PEUGEOT SA", 552100554, new GregorianCalendar(2018,2,20), new GregorianCalendar(2018,8,20), 600, "blabla");
         
-        // erreur nom entreprise
-        Formulaire f2 = new Formulaire(2, "tata", "tata", 20, "M2", "MIAGE", "Assu3", 1, "PEUGEOT SA", 552100554, new GregorianCalendar(2018,1,20), new GregorianCalendar(2018,8,20), 600, "blabla");
+        //Création OK
+        Formulaire f1 = new Formulaire(1, "toto", "toto", 10, "M2", "MIAGE", "Assu1", 1, "PEUGEOT SA", 552100554,
+                            new GregorianCalendar(2018,2,20), new GregorianCalendar(2018,8,20), 600, "blabla");
         
-        //erreur date
-        Formulaire f3 = new Formulaire(3, "titi", "titi", 30, "M2", "MIAGE", "Assu2", 1, "PEUGEOT SA", 552100554, new GregorianCalendar(2018,3,20), new GregorianCalendar(2018,8,20), 600, "blabla");;
-        Formulaire f4 = new Formulaire(4, "tutu", "tutu", 40, "M2", "MIAGE", "Assu5", 1, "PEUGEOT SA", 552100554, new GregorianCalendar(2018,2,20), new GregorianCalendar(2018,8,20), 600, "blabla");;
+        //Erreur nom entreprise
+        Formulaire f2 = new Formulaire(2, "tata", "tata", 20, "M2", "MIAGE", "Assu3", 1, "PIGEOT", 552100554, 
+                            new GregorianCalendar(2018,1,20), new GregorianCalendar(2018,8,20), 600, "blabla");
+        
+        //Erreur Numéro Siret
+        Formulaire f3 = new Formulaire(3, "tata", "tata", 30, "M2", "MIAGE", "Assu3", 1, "PIGEOT", 999999999, 
+                            new GregorianCalendar(2018,1,20), new GregorianCalendar(2018,8,20), 600, "blabla");
+        
+        //Erreur date
+        Formulaire f4 = new Formulaire(4, "titi", "titi", 40, "M2", "MIAGE", "Assu2", 1, "PEUGEOT SA", 552100554,
+                            new GregorianCalendar(2018,3,20), new GregorianCalendar(2018,8,20), 600,"blabla");
+        
+        //Rémunérarion inférieure à 500
+        Formulaire f5 = new Formulaire(5, "tutu", "tutu", 50, "M2", "MIAGE", "Assu5", 1, "PEUGEOT SA", 552100554,
+                            new GregorianCalendar(2018,2,20), new GregorianCalendar(2018,8,20), 400, "blabla");
 
 
        
@@ -65,15 +74,19 @@ public class DepotFormulaire extends ClientJMS{
                 msg3.setJMSType(Nommage.MSG_DEPOT);
                 ObjectMessage msg4 = session.createObjectMessage(f4);
                 msg4.setJMSType(Nommage.MSG_DEPOT);
+                ObjectMessage msg5 = session.createObjectMessage(f5);
+                msg5.setJMSType(Nommage.MSG_DEPOT);
                 
-                mp.send(msg1);
-                System.out.println("Form 1 envoyé");
-                mp.send(msg2);
-                System.out.println("Form 2 envoyé");
+//                mp.send(msg1);
+//                System.out.println("Form 1 envoyé");
+//                mp.send(msg2);
+//                System.out.println("Form 2 envoyé");
                 mp.send(msg3);
                 System.out.println("Form 3 envoyé");
-                mp.send(msg4);
-                System.out.println("Form 4 envoyé");
+//                mp.send(msg4);
+//                System.out.println("Form 4 envoyé");
+//                mp.send(msg5);
+//                System.out.println("Form 5 envoyé");
 
             } catch (JMSException ex) {
                 Logger.getLogger(DepotFormulaire.class.getName()).log(Level.SEVERE, null, ex);
