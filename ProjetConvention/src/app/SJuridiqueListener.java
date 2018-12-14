@@ -130,14 +130,18 @@ public class SJuridiqueListener implements MessageListener {
         Invocation.Builder invocationBuilder = wt.request(MediaType.APPLICATION_JSON);
         Response response = invocationBuilder.get();
         String reponse = response.readEntity(String.class);
-
-        // Convertisseur JSON
-        SirenPOJO model = gson.fromJson(reponse, SirenPOJO.class);
-        System.out.println("Résultat: " + response.getStatus());
-        System.out.println("Raison sociale : " + model.getRecords()[0].getFields().getL1_normalisee() + ", Date création entité : " + model.getRecords()[0].getFields().getDcren() + ", Activité : " + model.getRecords()[0].getFields().getActivite());
-        if (RS.equalsIgnoreCase(model.getRecords()[0].getFields().getL1_normalisee())){
-            return true; 
-        }else{
+        
+        try{
+            // Convertisseur JSON
+            SirenPOJO model = gson.fromJson(reponse, SirenPOJO.class);
+            System.out.println("Résultat: " + response.getStatus());
+            System.out.println("Raison sociale : " + model.getRecords()[0].getFields().getL1_normalisee() + ", Date création entité : " + model.getRecords()[0].getFields().getDcren() + ", Activité : " + model.getRecords()[0].getFields().getActivite());
+            if (RS.equalsIgnoreCase(model.getRecords()[0].getFields().getL1_normalisee())){
+                return true; 
+            }else{
+                return false;
+            }
+        }catch (ArrayIndexOutOfBoundsException ex){
             return false;
         }
     }
