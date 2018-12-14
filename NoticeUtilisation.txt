@@ -1,0 +1,18 @@
+POur lancer les clients JMS 
+
+utilise glassfish 5 
+
+
+executer SEnseingnement
+executer SJuridique 
+executer SScolarité 
+executer SStage 
+
+quand les services ont demarré 
+
+pour lancer les tests il faut utiliser DepotFormulaire
+il crée les messages et les transmets au Service des Stages 
+
+Pour la suite se referencer au dossier de conception. 
+
+petite difference les types de message ont été modifiés pour faciliter la partie metier (gestion des pré-conventions)  

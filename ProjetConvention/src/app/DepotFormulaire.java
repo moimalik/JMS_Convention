@@ -20,16 +20,16 @@ import messages.Formulaire;
  * @author Fouad El Ouaryaghli, Malik Belfodil
  */
 public class DepotFormulaire extends ClientJMS{
-        private MessageProducer mp;
+    
+    private MessageProducer mp;
 
-
-    /**
-         * parametrage des producteurs et des consommateurs
-         *  
-         * @return void. 
-    */
-    void setProducerConsumer() {
-
+/**
+ * Ceci est un commentaire Javadoc. 
+ * Il commence par un slash suivis de deux étoiles. 
+ * Chaque ligne doit ensuite commencer par une étoile. 
+ * Enfin, il fini par une étoile suivie d'un slash.
+ */    
+    private void setProducerConsumer() {
         try {
             // recuperation de la destination
             Destination dest = (Destination) namingContext.lookup(Nommage.QUEUE_DEPOT);
@@ -48,7 +48,7 @@ public class DepotFormulaire extends ClientJMS{
          *  
          * @return void. 
     */
-    void runSimu() {
+    private void runSimu() {
 
         // creation des formulaires
         
@@ -74,34 +74,34 @@ public class DepotFormulaire extends ClientJMS{
 
 
        
-            try {
-                // creation des ObjectMessage
-                ObjectMessage msg1 = session.createObjectMessage(f1);
-                msg1.setJMSType(Nommage.MSG_DEPOT);
-                ObjectMessage msg2 = session.createObjectMessage(f2);
-                msg2.setJMSType(Nommage.MSG_DEPOT);
-                ObjectMessage msg3 = session.createObjectMessage(f3);
-                msg3.setJMSType(Nommage.MSG_DEPOT);
-                ObjectMessage msg4 = session.createObjectMessage(f4);
-                msg4.setJMSType(Nommage.MSG_DEPOT);
-                ObjectMessage msg5 = session.createObjectMessage(f5);
-                msg5.setJMSType(Nommage.MSG_DEPOT);
-                
-                mp.send(msg1);
-                System.out.println("Form 1 envoyé");
-                mp.send(msg2);
-                System.out.println("Form 2 envoyé");
-                mp.send(msg3);
-                System.out.println("Form 3 envoyé");
-                mp.send(msg4);
-                System.out.println("Form 4 envoyé");
-                mp.send(msg5);
-                System.out.println("Form 5 envoyé");
+        try {
+            // creation des ObjectMessage
+            ObjectMessage msg1 = session.createObjectMessage(f1);
+            msg1.setJMSType(Nommage.MSG_DEPOT);
+            ObjectMessage msg2 = session.createObjectMessage(f2);
+            msg2.setJMSType(Nommage.MSG_DEPOT);
+            ObjectMessage msg3 = session.createObjectMessage(f3);
+            msg3.setJMSType(Nommage.MSG_DEPOT);
+            ObjectMessage msg4 = session.createObjectMessage(f4);
+            msg4.setJMSType(Nommage.MSG_DEPOT);
+            ObjectMessage msg5 = session.createObjectMessage(f5);
+            msg5.setJMSType(Nommage.MSG_DEPOT);
 
-            } catch (JMSException ex) {
-                Logger.getLogger(DepotFormulaire.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            mp.send(msg1);
+            System.out.println("Form 1 envoyé");
+            mp.send(msg2);
+            System.out.println("Form 2 envoyé");
+            mp.send(msg3);
+            System.out.println("Form 3 envoyé");
+            mp.send(msg4);
+            System.out.println("Form 4 envoyé");
+            mp.send(msg5);
+            System.out.println("Form 5 envoyé");
+
+        } catch (JMSException ex) {
+            Logger.getLogger(DepotFormulaire.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
     /**
      * @param args the command line arguments
