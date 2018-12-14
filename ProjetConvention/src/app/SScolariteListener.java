@@ -19,8 +19,9 @@ import messages.Formulaire;
 import messages.FormulaireEnValidation;
 
 /**
- *
- * @author malik
+ *  service scolarité partie metier
+ * 
+ * @author Fouad El Ouaryaghli, Malik Belfodil
  */
 public class SScolariteListener implements MessageListener{
 
@@ -31,7 +32,13 @@ public class SScolariteListener implements MessageListener{
         this.session = session;
         this.mp = mp;
     }
-    
+    /**
+         * reception, realisation metier et expedition
+         * 
+         * @param message
+         *  
+         * @return void. 
+    */
     @Override
     public void onMessage(Message message) {
         try {
@@ -75,6 +82,13 @@ public class SScolariteListener implements MessageListener{
         
         
     }
+    /**
+         * traitement du service scolarité
+         * 
+         * @param nom, prenom, n°etudiant, niveau diplome, intitulé diplome 
+         *  
+         * @return boolean. 
+    */
     public boolean metier(String nom,String prenom, int num, String niveau,String inti ){
         // aucune api pour verifier les assurances
         System.out.println("Nom "+nom+" "+prenom+" N° "+String.valueOf(num) +" Niveau "+niveau+" intitulé "+inti);

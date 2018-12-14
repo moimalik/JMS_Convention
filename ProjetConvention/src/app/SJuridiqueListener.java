@@ -28,8 +28,9 @@ import javax.ws.rs.core.Response;
 import messages.*;
 
 /**
- *
- * @author Fouad El Ouaryaghli
+ *  service juridique partie metier
+ * 
+ * @author Fouad El Ouaryaghli, Malik Belfodil
  */
 public class SJuridiqueListener implements MessageListener {
     
@@ -40,6 +41,13 @@ public class SJuridiqueListener implements MessageListener {
         this.session = session;
         this.mp = mp;
     }
+    /**
+         * reception realisation metier et expedition
+         * 
+         * @param message
+         *  
+         * @return void. 
+    */
     @Override
     public void onMessage(Message message) {
         try {
@@ -68,10 +76,10 @@ public class SJuridiqueListener implements MessageListener {
                         boolean vDate = metierDate(verif.getDtDeb(),verif.getDtFin()) ;
                         boolean vRemuneration = metierRemuneration(verif.getPaie()) ;
                         
-                        System.out.println("result vent " + vEntreprise);
+                        /*System.out.println("result vent " + vEntreprise);
                         System.out.println("result ass " + vAssurance);
                         System.out.println("result date " + vDate);
-                        System.out.println("result rem " + vRemuneration);
+                        System.out.println("result rem " + vRemuneration);*/
                         if(vEntreprise && vAssurance && vDate && vRemuneration){
                         //if(true){
                             verif.setVerifJuridique(EtatFormulaire.VALIDEE);
@@ -91,6 +99,13 @@ public class SJuridiqueListener implements MessageListener {
         }
 
     }
+    /**
+         * Retourne un boolean qui verifie l'entreprise dans la base INSEE
+         * 
+         * @param siren et nom de l'entreprise
+         *  
+         * @return boolean. 
+    */
     public boolean metierInsee(String siren, String RS ){
         Gson gson = new Gson();
 
@@ -126,6 +141,13 @@ public class SJuridiqueListener implements MessageListener {
             return false;
         }
     }
+    /**
+         * Retourne un boolean qui verifie si l'assurance est OK
+         * 
+         * @param nom de l'etudiant, numero et nom assurance et date de stage 
+         *  
+         * @return boolean. 
+    */
     public boolean metierAssurance(String nom,String nomAss, int numAss, Calendar debut, Calendar fin  ){
         // aucune api pour verifier les assurances
         Scanner sc = new Scanner(System.in);
@@ -138,6 +160,13 @@ public class SJuridiqueListener implements MessageListener {
         }
         
     }
+    /**
+         * Retourne un boolean qui verifie si la remuneration est OK
+         * 
+         * @param le salaire 
+         *  
+         * @return boolean. 
+    */
     public boolean metierRemuneration(int salaire ){
         if (salaire > 500){
             return true;
@@ -145,6 +174,13 @@ public class SJuridiqueListener implements MessageListener {
             return false;
         }
     }
+    /**
+         * Retourne un boolean qui verifie si les dates sont OK
+         * 
+         * @param date de stage 
+         *  
+         * @return boolean. 
+    */
     public boolean metierDate(GregorianCalendar debut, GregorianCalendar fin ){
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(Math.abs(debut.getTimeInMillis()-fin.getTimeInMillis()));

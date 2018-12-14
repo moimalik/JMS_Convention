@@ -21,8 +21,9 @@ import messages.*;
 
 
 /**
- *
- * @author malik
+ *  service enseignement partie metier
+ * 
+ * @author Fouad El Ouaryaghli, Malik Belfodil
  */
 public class SEnseignementListener implements MessageListener{
 
@@ -34,6 +35,13 @@ public class SEnseignementListener implements MessageListener{
         this.mp = mp;
         
     }
+    /**
+         * reception, realisation metier et expedition
+         * 
+         * @param message
+         *  
+         * @return void. 
+    */
     @Override
     public void onMessage(Message message) {
         
@@ -90,6 +98,13 @@ public class SEnseignementListener implements MessageListener{
         }
         
     }
+    /**
+         * mise en forme du message de retour
+         * 
+         * @param message
+         *  
+         * @return void. 
+    */
     public void traitementPreConv(FormulaireEnValidation f){
         
         double val = Math.random();
@@ -101,6 +116,13 @@ public class SEnseignementListener implements MessageListener{
             f.setVerifEnseignement(EtatFormulaire.REFUSEE);
         }
     }
+    /**
+         * mise en forme du message de retour
+         * 
+         * @param siren et nom de l'entreprise
+         *  
+         * @return boolean. 
+    */
     public void traitementValid(ValidOk f){
         System.out.println("Demande de Pre convention Validée !!!");
         System.out.println(f.toString());

@@ -19,8 +19,9 @@ import javax.jms.Session;
 import messages.*;
 
 /**
- *
- * @author Fouad El Ouaryaghli
+ *  service stage partie metier
+ * 
+ * @author Fouad El Ouaryaghli, Malik Belfodil
  */
 public class SStageListener implements MessageListener {
 
@@ -33,7 +34,13 @@ public class SStageListener implements MessageListener {
         this.session = session;
         this.mp = mp;
     }
-
+/**
+         * verification des retour de formulaire
+         * 
+         * @param id pre convention
+         *  
+         * @return boolean. 
+    */
     private boolean formulaireConfirmee(int key) {
         
         if (formEnAttente.containsKey(key)) {
@@ -44,7 +51,13 @@ public class SStageListener implements MessageListener {
         }
         return false;
     }
-    
+    /**
+         * reception, realisation metier et expedition
+         * 
+         * @param message
+         *  
+         * @return void. 
+    */
     @Override
     public void onMessage(Message msg) {
         try 
